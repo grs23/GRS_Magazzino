@@ -81,6 +81,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anagrafica\Schermata_grs_anagrafica.Designer.vb">
+      <DependentUpon>Schermata_grs_anagrafica.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Anagrafica\Schermata_grs_anagrafica.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Anagrafica\Schermata_grs_anagrafica_Modi.Designer.vb">
+      <DependentUpon>Schermata_grs_anagrafica_Modi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Anagrafica\Schermata_grs_anagrafica_Modi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Menu\MenuGRS.Designer.vb">
       <DependentUpon>MenuGRS.vb</DependentUpon>
     </Compile>
@@ -111,6 +123,12 @@
     <Compile Include="Service\Tasti.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Anagrafica\Schermata_grs_anagrafica.resx">
+      <DependentUpon>Schermata_grs_anagrafica.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Anagrafica\Schermata_grs_anagrafica_Modi.resx">
+      <DependentUpon>Schermata_grs_anagrafica_Modi.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuGRS.resx">
       <DependentUpon>MenuGRS.vb</DependentUpon>
     </EmbeddedResource>
