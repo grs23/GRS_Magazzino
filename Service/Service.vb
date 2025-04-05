@@ -166,58 +166,6 @@
             End If
         End If
     End Function
-    'Shared Sub LeggiFileSettaggi(filePath As String)
-    '    If IO.File.Exists(filePath) Then
-    '        ''----------------------------------------------------------------------------------------------------------------------------------
-    '        '-----------------------------------------------------------------CRIPTA
-    '        'Dim leggiTesto As String = IO.File.ReadAllText(filePath)
-
-    '        'Dim lunghezzaStringaRandom = 10
-
-    '        ''-----------------------------------------------------------------DECRIPTA
-    '        'Dim testoDecriptato As String = Decripta(leggiTesto, lunghezzaStringaRandom, lunghezzaStringaRandom)
-
-    '        'Dim listaElementi As New List(Of String)
-
-    '        ''-----------------------------------------------------------------
-    '        'listaElementi.AddRange(testoDecriptato.Split(Environment.NewLine))
-    '        '----------------------------------------------------------------------------------------------------------------------------------
-    '        '-----------------------------------------------------------------METODO SENZA CIFRATURA NE NULLA
-    '        Dim listaElementi As New List(Of String)
-    '        listaElementi.AddRange(IO.File.ReadAllLines(filePath).ToList)
-    '        '----------------------------------------------------------------------------------------------------------------------------------
-
-    '        For Each sLine In listaElementi
-    '            sLine = sLine.Replace(vbLf, "")
-    '            If sLine.ToString.Contains("=") Then
-    '                If sLine.ToUpper.StartsWith("PERCORSO_CARTELLE_PRATICHE") Then
-    '                    MenuDsAu.PradoPercPrati = sLine.ToString.Substring(sLine.ToString.IndexOf("=") + 1).Trim
-    '                ElseIf sLine.ToUpper.StartsWith("PERCORSO_PDF") Then
-    '                    MenuDsAu.PradoPercPdf = sLine.ToString.Substring(sLine.ToString.IndexOf("=") + 1).Trim
-    '                ElseIf sLine.ToUpper.StartsWith("PERCORSO_LOGHI") Then
-    '                    MenuDsAu.PradoPercLoghi = sLine.ToString.Substring(sLine.ToString.IndexOf("=") + 1).Trim
-    '                ElseIf sLine.ToUpper.StartsWith("ANNO") Then
-    '                    MenuDsAu.PradoAnnoPrat = sLine.ToString.Substring(sLine.ToString.IndexOf("=") + 1).Trim
-    '                End If
-
-    '            End If
-    '        Next
-    '    Else
-    '        'If Not IO.Directory.Exists(IO.Path.GetDirectoryName(filePath)) Then
-    '        '    IO.Directory.CreateDirectory(IO.Path.GetDirectoryName(filePath))
-    '        'End If
-
-    '        If IO.Directory.Exists(IO.Path.GetDirectoryName(filePath)) Then
-    '            Using sw As IO.StreamWriter = IO.File.CreateText(filePath)
-    '                sw.WriteLine("PERCORSO_CARTELLE_PRATICHE = ")
-    '                sw.WriteLine("PERCORSO_PDF = ")
-    '                sw.WriteLine("PERCORSO_LOGHI = ")
-    '                sw.WriteLine("ANNO = ")
-    '            End Using
-    '        End If
-
-    '    End If
-    'End Sub
 
     Shared Sub ApriFileConf(filePath)
         Shell("notepad.exe " & filePath, AppWinStyle.MaximizedFocus)
@@ -369,5 +317,54 @@ inizio:
             End Try
         End If
         Return nominativo
+    End Function
+
+
+    'CANCELLAZIONE-----------------------------------------------------------
+    Private Shared Function Cancella(tabella As String, id As Integer, conn As MySqlConnection) As Boolean
+        Try
+            Dim command As New MySqlCommand With {
+                .Connection = conn
+            }
+            command.CommandText = "UPDATE " + tabella + " SET 
+                                   cancellato = @cancellato,
+                                   uten_cance = @uten_cance
+								   WHERE id  = @id"
+
+            command.Parameters.AddWithValue("@cancellato", True)
+
+            command.Parameters.AddWithValue("@uten_cance", UtenteDelMomento())
+
+            command.Parameters.AddWithValue("@id", id)
+
+            command.ExecuteNonQuery()
+
+            command.Dispose()
+        Catch ex As Exception
+            MessageBox.Show("Impossibile completare l'operazione, contattare l'assistenza.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            'MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            Return False
+        End Try
+
+        Return True
+    End Function
+    Public Shared Function CancRigo(tabella As String, id As Integer, conn As MySqlConnection, box As Boolean) As Boolean
+        If box Then
+            If id <> 0 Then
+                Dim res As DialogResult = MessageBox.Show("Vuoi cancellare questa registrazione?", "Cancellazione", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If res = DialogResult.OK Then
+                    Return Cancella(tabella, id, conn)
+                End If
+            Else
+                MessageBox.Show("Impossibile completare l'operazione" & Environment.NewLine & "poichè il dato non è memorizzato.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            End If
+        Else
+            If id <> 0 Then
+                Return Cancella(tabella, id, conn)
+            End If
+        End If
+
+        Return False
     End Function
 End Class

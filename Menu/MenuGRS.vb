@@ -67,20 +67,22 @@
         CType(sender, Label).BackColor = Color.Transparent
     End Sub
 
-    Private Sub LblIngresso_Click(sender As Object, e As EventArgs) Handles LblClienti.Click
-        'If CheckFormAperto(IngressoUscita, Application.OpenForms, True) Then
-        '    MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
-        'Else
-        '    IngressoUscita.Show()
-        'End If
+    Private Sub LblClienti_Click(sender As Object, e As EventArgs) Handles LblClienti.Click
+        If CheckFormAperto(Schermata_grs_anagrafica, Application.OpenForms, True) Then
+            MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        Else
+            Schermata_grs_anagrafica.Show()
+            Schermata_grs_anagrafica.tipo_anagrafica = Schermata_grs_anagrafica.tipo_cliente
+        End If
     End Sub
 
-    Private Sub LblUscita_Click(sender As Object, e As EventArgs) Handles LblDipendenti.Click
-        'If CheckFormAperto(AutoSostate, Application.OpenForms, True) Then
-        '    MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
-        'Else
-        '    AutoSostate.Show()
-        'End If
+    Private Sub LblDipendente_Click(sender As Object, e As EventArgs) Handles LblDipendenti.Click
+        If CheckFormAperto(Schermata_grs_anagrafica, Application.OpenForms, True) Then
+            MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        Else
+            Schermata_grs_anagrafica.Show()
+            Schermata_grs_anagrafica.tipo_anagrafica = Schermata_grs_anagrafica.tipo_dipendente
+        End If
     End Sub
 
     Private Sub LblRubrica_Click(sender As Object, e As EventArgs)

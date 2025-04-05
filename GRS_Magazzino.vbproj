@@ -54,6 +54,22 @@
     <Reference Include="GRSLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\GRSLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>Resources\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.23.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\MySql.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MySqlBackup, Version=2.3.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\MySqlBackup.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,9 +85,11 @@
   <ItemGroup>
     <Import Include="GRSLib" />
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="MySql.Data.MySqlClient" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
+    <Import Include="System.ComponentModel" />
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
@@ -93,6 +111,7 @@
     <Compile Include="Anagrafica\Schermata_grs_anagrafica_Modi.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Menu\MenuGRS.Designer.vb">
       <DependentUpon>MenuGRS.vb</DependentUpon>
     </Compile>
@@ -120,6 +139,7 @@
     <Compile Include="Service\Query.vb" />
     <Compile Include="Service\RegiData.vb" />
     <Compile Include="Service\Service.vb" />
+    <Compile Include="Service\TabelleDatabase.vb" />
     <Compile Include="Service\Tasti.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +179,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\GRSLib.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MySql.Data.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MySqlBackup.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Microsoft.Office.Interop.Excel.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

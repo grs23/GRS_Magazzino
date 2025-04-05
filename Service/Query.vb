@@ -109,7 +109,20 @@ Public Class Query
         Return row
     End Function
 
-    Public Function CaricaAnagrafica(conn As IDbConnection, Optional nome As String = "", Optional cognome As String = "", Optional telefono As String = "") As DataTable
+    Public Function CaricaRigoAnagrafica(conn As IDbConnection, tipo_anagr As String, ragi_socia As String, Optional desc_recap As String = "") As DataRow
+        Dim dt As DataTable = CaricaAnagrafiche(conn, tipo_anagr, ragi_socia, desc_recap)
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)
+        Else
+            Return Nothing
+        End If
+    End Function
+    Public Function CaricaAnagrafica(conn As IDbConnection, tipo_anagr As String, Optional ragi_socia As String = "", Optional desc_recap As String = "") As DataTable
+        Dim dt As DataTable = CaricaAnagrafiche(conn, tipo_anagr, ragi_socia, desc_recap)
+        Return dt
+    End Function
+
+    Private Function CaricaAnagrafiche(conn As IDbConnection, tipo_anagr As String, ragi_socia As String, desc_recap As String) As DataTable
         Dim dt As New DataTable
         Dim chiudiConn As Boolean = False
         Try
@@ -121,19 +134,18 @@ Public Class Query
             Dim command As IDbCommand = conn.CreateCommand
 
             command.CommandText = "SELECT * FROM grsanag WHERE cancellato = @cancellato "
+            command.CommandText &= "AND tipo_anagr = @tipo_anagr "
 
             AggiungiParametro(command, "@cancellato", False)
-            If nome.Trim <> "" Then
-                command.CommandText &= "AND nome = @nome "
-                AggiungiParametro(command, "@nome", nome.Trim)
+            AggiungiParametro(command, "@tipo_anagr", tipo_anagr.Trim)
+
+            If ragi_socia IsNot Nothing AndAlso ragi_socia <> "" Then
+                command.CommandText &= "AND ragi_socia = @ragi_socia "
+                AggiungiParametro(command, "@ragi_socia", ragi_socia.Trim)
             End If
-            If cognome IsNot Nothing AndAlso cognome <> "" Then
-                command.CommandText &= "AND cognome = @cognome "
-                AggiungiParametro(command, "@cognome", cognome.Trim)
-            End If
-            If telefono IsNot Nothing AndAlso telefono <> "" Then
-                command.CommandText &= "AND telefono = @telefono "
-                AggiungiParametro(command, "@telefono", telefono.Trim)
+            If desc_recap IsNot Nothing AndAlso desc_recap <> "" Then
+                command.CommandText &= "AND desc_recap = @desc_recap "
+                AggiungiParametro(command, "@desc_recap", desc_recap.Trim)
             End If
             Dim reader As IDataReader = command.ExecuteReader()
 

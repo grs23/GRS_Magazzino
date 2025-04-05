@@ -89,5 +89,35 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Cerca una risorsa localizzata di tipo System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Microsoft_Office_Interop_Excel() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Microsoft_Office_Interop_Excel", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Cerca una risorsa localizzata di tipo System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property MySql_Data() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("MySql_Data", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Cerca una risorsa localizzata di tipo System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property MySqlBackup() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("MySqlBackup", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
     End Module
 End Namespace
