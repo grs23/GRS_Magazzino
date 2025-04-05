@@ -112,6 +112,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Inventario\Schermata_grs_inventario.Designer.vb">
+      <DependentUpon>Schermata_grs_inventario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\Schermata_grs_inventario.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\Schermata_grs_inventario_Modi.Designer.vb">
+      <DependentUpon>Schermata_grs_inventario_Modi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\Schermata_grs_inventario_Modi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Menu\MenuGRS.Designer.vb">
       <DependentUpon>MenuGRS.vb</DependentUpon>
     </Compile>
@@ -148,6 +160,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Anagrafica\Schermata_grs_anagrafica_Modi.resx">
       <DependentUpon>Schermata_grs_anagrafica_Modi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\Schermata_grs_inventario.resx">
+      <DependentUpon>Schermata_grs_inventario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\Schermata_grs_inventario_Modi.resx">
+      <DependentUpon>Schermata_grs_inventario_Modi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuGRS.resx">
       <DependentUpon>MenuGRS.vb</DependentUpon>

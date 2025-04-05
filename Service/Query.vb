@@ -160,4 +160,50 @@ Public Class Query
 
         Return dt
     End Function
+    Public Function CaricaRigoInventario(conn As IDbConnection, desc_artic As String, Optional quant_artic As Decimal = Nothing) As DataRow
+        Dim dt As DataTable = CaricaInventario(conn, desc_artic)
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)
+        Else
+            Return Nothing
+        End If
+    End Function
+    Public Function CaricaInventario(conn As IDbConnection, Optional desc_artic As String = "", Optional quant_artic As Decimal = Nothing) As DataTable
+        Dim dt As DataTable = CaricaInventario(conn, desc_artic)
+        Return dt
+    End Function
+
+    Private Function CaricaInventario(conn As IDbConnection, desc_artic As String) As DataTable
+        Dim dt As New DataTable
+        Dim chiudiConn As Boolean = False
+        Try
+            If conn.State <> ConnectionState.Open Then
+                chiudiConn = True
+                conn.Open()
+            End If
+
+            Dim command As IDbCommand = conn.CreateCommand
+
+            command.CommandText = "SELECT * FROM grs_articoli WHERE cancellato = @cancellato "
+
+            AggiungiParametro(command, "@cancellato", False)
+
+            If desc_artic IsNot Nothing AndAlso desc_artic <> "" Then
+                command.CommandText &= "AND desc_artic = @desc_artic "
+                AggiungiParametro(command, "@desc_artic", desc_artic.Trim)
+            End If
+
+            Dim reader As IDataReader = command.ExecuteReader()
+
+            dt.Load(reader)
+        Catch ex As Exception
+            Console.WriteLine("Errore : " & ex.Message)
+        Finally
+            If chiudiConn Then
+                conn.Close()
+            End If
+        End Try
+
+        Return dt
+    End Function
 End Class

@@ -112,7 +112,7 @@
             modi(rowCorpo)
             Try
                 conn.Open()
-                AggiornaDBProdotti(rowCorpo, conn)
+                ' AggiornaDBProdotti(rowCorpo, conn)
 
             Catch ex As Exception
                 Console.WriteLine("Errore: " & ex.Message)
@@ -121,9 +121,9 @@
             End Try
 
             If rowCorpo.RowState = DataRowState.Detached Then
-                If TypeOf fp Is Schermata_grs_anagrafica Then
-                    CType(fp, Schermata_grs_anagrafica).dtCorpo.Rows.Add(rowCorpo)
-                    CType(fp, Schermata_grs_anagrafica).dtCorpo.AcceptChanges()
+                If TypeOf fp Is Schermata_grs_inventario Then
+                    CType(fp, Schermata_grs_inventario).dtCorpo.Rows.Add(rowCorpo)
+                    CType(fp, Schermata_grs_inventario).dtCorpo.AcceptChanges()
                 End If
             End If
             esci()

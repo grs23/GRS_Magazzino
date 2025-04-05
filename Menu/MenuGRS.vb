@@ -84,6 +84,14 @@
             Schermata_grs_anagrafica.tipo_anagrafica = Schermata_grs_anagrafica.tipo_dipendente
         End If
     End Sub
+    Private Sub LblArticoli_Click(sender As Object, e As EventArgs) Handles LblArticoli.Click
+        If CheckFormAperto(Schermata_grs_inventario, Application.OpenForms, True) Then
+            MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        Else
+            Schermata_grs_inventario.Show()
+
+        End If
+    End Sub
 
     Private Sub LblRubrica_Click(sender As Object, e As EventArgs)
         'If CheckFormAperto(AutoSostate, Application.OpenForms, True) OrElse
@@ -107,4 +115,6 @@
     Private Sub LblImpostazioni_Click(sender As Object, e As EventArgs)
         'Tariffe.Show()
     End Sub
+
+
 End Class

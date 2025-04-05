@@ -53,7 +53,8 @@
                                                 desc_artic      VARCHAR(100) DEFAULT '',
                                                 prez_unita      NUMERIC(5,2) DEFAULT 0,
                                                 unit_misur      VARCHAR(  2) DEFAULT '',
-                                                quan_minim      INTEGER      DEFAULT 0
+                                                quan_artic      NUMERIC(11,2) DEFAULT 0,
+                                                quan_minim      NUMERIC(11,2) DEFAULT 0
                                                 ) " & motore
 
             command.ExecuteNonQuery()
