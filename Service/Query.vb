@@ -206,4 +206,174 @@ Public Class Query
 
         Return dt
     End Function
+
+
+
+    Public Function CaricaRigoInterventoTestata(conn As IDbConnection,
+                                                anno_inter As Integer, nume_inter As Integer) As DataRow
+        Dim dt As DataTable = CaricaInterventi(conn, anno_inter, nume_inter, "", Nothing, Nothing)
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)
+        Else
+            Return Nothing
+        End If
+    End Function
+    Public Function CaricaInterventiLista(conn As IDbConnection,
+                                          Optional anno_inter As Integer = 0, Optional desc_clien As String = "",
+                                          Optional da_data_inizi As Date = Nothing, Optional a_data_inizi As Date = Nothing) As DataTable
+        Dim dt As DataTable = CaricaInterventi(conn, anno_inter, 0, desc_clien, da_data_inizi, a_data_inizi)
+        Return dt
+    End Function
+
+    Private Function CaricaInterventi(conn As IDbConnection,
+                                      anno_inter As Integer, nume_inter As Integer,
+                                      desc_clien As String, da_data_inizi As Date, a_data_inizi As Date) As DataTable
+        Dim dt As New DataTable
+        Dim chiudiConn As Boolean = False
+        Try
+            If conn.State <> ConnectionState.Open Then
+                chiudiConn = True
+                conn.Open()
+            End If
+
+            Dim command As IDbCommand = conn.CreateCommand
+
+            command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_intervento_testata & " WHERE cancellato = @cancellato "
+
+            AggiungiParametro(command, "@cancellato", False)
+
+            If anno_inter <> 0 Then
+                command.CommandText &= "AND anno_inter = @anno_inter "
+                AggiungiParametro(command, "@anno_inter", anno_inter)
+            End If
+
+            If nume_inter <> 0 Then
+                command.CommandText &= "AND nume_inter = @nume_inter "
+                AggiungiParametro(command, "@nume_inter", nume_inter)
+            End If
+
+            If desc_clien IsNot Nothing AndAlso desc_clien <> "" Then
+                command.CommandText &= "AND desc_clien = @desc_clien "
+                AggiungiParametro(command, "@desc_clien", desc_clien.Trim)
+            End If
+
+            If da_data_inizi <> Nothing Then
+                command.CommandText &= "AND data_inizi >= @data_inizi "
+                AggiungiParametro(command, "@data_inizi", da_data_inizi)
+            End If
+
+            If a_data_inizi <> Nothing Then
+                command.CommandText &= "AND data_inizi <= @data_inizi "
+                AggiungiParametro(command, "@data_inizi", a_data_inizi)
+            End If
+
+            Dim reader As IDataReader = command.ExecuteReader()
+
+            dt.Load(reader)
+        Catch ex As Exception
+            Console.WriteLine("Errore : " & ex.Message)
+        Finally
+            If chiudiConn Then
+                conn.Close()
+            End If
+        End Try
+
+        Return dt
+    End Function
+
+    Public Function CaricaRigoInterventoDettaglio(conn As IDbConnection,
+                                                anno_inter As Integer, nume_inter As Integer, desc_artic As String) As DataRow
+        Dim dt As DataTable = CaricaInterventiDettagli(conn, anno_inter, nume_inter, desc_artic)
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)
+        Else
+            Return Nothing
+        End If
+    End Function
+    Public Function CaricaInterventiDettagliLista(conn As IDbConnection,
+                                          Optional anno_inter As Integer = 0, Optional desc_artic As String = "") As DataTable
+        Dim dt As DataTable = CaricaInterventiDettagli(conn, anno_inter, 0, desc_artic)
+        Return dt
+    End Function
+
+    Private Function CaricaInterventiDettagli(conn As IDbConnection,
+                                      anno_inter As Integer, nume_inter As Integer,
+                                      desc_artic As String) As DataTable
+        Dim dt As New DataTable
+        Dim chiudiConn As Boolean = False
+        Try
+            If conn.State <> ConnectionState.Open Then
+                chiudiConn = True
+                conn.Open()
+            End If
+
+            Dim command As IDbCommand = conn.CreateCommand
+
+            command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_intervento_dettaglio & " WHERE cancellato = @cancellato "
+
+            AggiungiParametro(command, "@cancellato", False)
+
+            If anno_inter <> 0 Then
+                command.CommandText &= "AND anno_inter = @anno_inter "
+                AggiungiParametro(command, "@anno_inter", anno_inter)
+            End If
+
+            If nume_inter <> 0 Then
+                command.CommandText &= "AND nume_inter = @nume_inter "
+                AggiungiParametro(command, "@nume_inter", nume_inter)
+            End If
+
+            If desc_artic IsNot Nothing AndAlso desc_artic <> "" Then
+                command.CommandText &= "AND desc_artic = @desc_artic "
+                AggiungiParametro(command, "@desc_artic", desc_artic.Trim)
+            End If
+
+            Dim reader As IDataReader = command.ExecuteReader()
+
+            dt.Load(reader)
+        Catch ex As Exception
+            Console.WriteLine("Errore : " & ex.Message)
+        Finally
+            If chiudiConn Then
+                conn.Close()
+            End If
+        End Try
+
+        Return dt
+    End Function
+
+    Public Function CalcolaProgressivoInterventiAnnuale(conn As IDbConnection,
+                                      anno_inter As Integer) As Integer
+        Dim dt As New DataTable
+        Dim chiudiConn As Boolean = False
+        Try
+            If conn.State <> ConnectionState.Open Then
+                chiudiConn = True
+                conn.Open()
+            End If
+
+            Dim command As IDbCommand = conn.CreateCommand
+
+            command.CommandText = "SELECT MAX(nume_inter) AS max FROM " & TabelleDatabase.tb_intervento_dettaglio &
+                                  " WHERE cancellato = @cancellato AND anno_inter = @anno_inter"
+
+            AggiungiParametro(command, "@cancellato", False)
+            AggiungiParametro(command, "@anno_inter", anno_inter)
+
+            Dim reader As IDataReader = command.ExecuteReader()
+
+            dt.Load(reader)
+        Catch ex As Exception
+            Console.WriteLine("Errore : " & ex.Message)
+        Finally
+            If chiudiConn Then
+                conn.Close()
+            End If
+        End Try
+        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+            Return dt.Rows(0)("max") + 1
+        Else
+            Return 1
+        End If
+    End Function
 End Class

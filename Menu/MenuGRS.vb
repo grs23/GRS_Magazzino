@@ -5,7 +5,7 @@
     Public exe As String = Application.ExecutablePath.Replace(percorso & "\", "")
     Public nomeFileConnessione As String = "GRSConn.cfg"
     Public percorsoPrincipaleConnessione As String = percorso & "\Programs\" & nomeFileConnessione
-    Public versione As String = "2023.12.11.1"
+    Public versione As String = "2025.04.06.1"
 
     Public rigoUten As DataRow = Nothing
     Private Sub MenuGRS_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -116,5 +116,12 @@
         'Tariffe.Show()
     End Sub
 
-
+    Private Sub LblInterventi_Click(sender As Object, e As EventArgs) Handles LblInterventi.Click
+        If CheckFormAperto(Schermata_grs_interventi, Application.OpenForms, True) OrElse CheckFormAperto(Schermata_grs_interventi_Modi, Application.OpenForms, True) Then
+            MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        Else
+            Schermata_grs_interventi.fp = Me
+            Schermata_grs_interventi.Show()
+        End If
+    End Sub
 End Class

@@ -47,7 +47,7 @@
                 e.SuppressKeyPress = True
                 Try
                     conn.Open()
-                    If Service.CancRigo(TabelleDatabase.anagrafica, DgvCorpo.CurrentRow.DataBoundItem.row("id"), conn, True) Then
+                    If Service.CancRigo(TabelleDatabase.tb_anagrafica, DgvCorpo.CurrentRow.DataBoundItem.row("id"), conn, True) Then
                         dtCorpo.Rows.Remove(DgvCorpo.CurrentRow.DataBoundItem.row)
                     End If
                 Catch ex As Exception

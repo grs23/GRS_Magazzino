@@ -112,6 +112,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Interventi\Schermata_grs_interventi.Designer.vb">
+      <DependentUpon>Schermata_grs_interventi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Interventi\Schermata_grs_interventi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interventi\Schermata_grs_interventi_Modi.Designer.vb">
+      <DependentUpon>Schermata_grs_interventi_Modi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Interventi\Schermata_grs_interventi_Modi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Inventario\Schermata_grs_inventario.Designer.vb">
       <DependentUpon>Schermata_grs_inventario.vb</DependentUpon>
     </Compile>
@@ -161,6 +173,12 @@
     <EmbeddedResource Include="Anagrafica\Schermata_grs_anagrafica_Modi.resx">
       <DependentUpon>Schermata_grs_anagrafica_Modi.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interventi\Schermata_grs_interventi.resx">
+      <DependentUpon>Schermata_grs_interventi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interventi\Schermata_grs_interventi_Modi.resx">
+      <DependentUpon>Schermata_grs_interventi_Modi.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventario\Schermata_grs_inventario.resx">
       <DependentUpon>Schermata_grs_inventario.vb</DependentUpon>
     </EmbeddedResource>
@@ -207,5 +225,6 @@
   <ItemGroup>
     <None Include="Resources\Microsoft.Office.Interop.Excel.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -133,7 +133,7 @@
                                                 nume_inter      INTEGER      DEFAULT 0, 
 
                                                 desc_artic      VARCHAR(100) DEFAULT '',
-                                                quan_minim      INTEGER      DEFAULT 0,
+                                                quantita        INTEGER      DEFAULT 0,
                                                 prez_unita      NUMERIC(5,2) DEFAULT 0
                                                 ) " & motore
 
