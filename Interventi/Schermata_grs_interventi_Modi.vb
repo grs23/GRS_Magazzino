@@ -108,4 +108,5 @@
     Public Sub InfoCamp()
         Tsstabella.Text = TltTabella.GetToolTip(ActiveControl)
     End Sub
+
 End Class

@@ -105,14 +105,14 @@
             Return True
         End If
     End Function
-    Public Sub conferma()
+    Private Sub BtnSalva_Click(sender As Object, e As EventArgs) Handles BtnSalva.Click
 
         If vericamp() Then
 
             modi(rowCorpo)
             Try
                 conn.Open()
-                ' AggiornaDBProdotti(rowCorpo, conn)
+                AggiornaAnagrafica(rowCorpo, conn)
 
             Catch ex As Exception
                 Console.WriteLine("Errore: " & ex.Message)
@@ -121,15 +121,16 @@
             End Try
 
             If rowCorpo.RowState = DataRowState.Detached Then
-                If TypeOf fp Is Schermata_grs_inventario Then
-                    CType(fp, Schermata_grs_inventario).dtCorpo.Rows.Add(rowCorpo)
-                    CType(fp, Schermata_grs_inventario).dtCorpo.AcceptChanges()
+                If TypeOf fp Is Schermata_grs_anagrafica Then
+                    CType(fp, Schermata_grs_anagrafica).dtCorpo.Rows.Add(rowCorpo)
+                    CType(fp, Schermata_grs_anagrafica).dtCorpo.AcceptChanges()
                 End If
             End If
-            esci()
+            Close()
         End If
     End Sub
-    Public Sub esci()
+
+    Private Sub BtnEsci_Click(sender As Object, e As EventArgs) Handles BtnEsci.Click
         Close()
     End Sub
 

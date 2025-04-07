@@ -101,39 +101,22 @@
             SegnalaErrori(TxtDescArtic)
             ActiveControl = TxtDescArtic
             Return False
-        Else
-            Return True
-        End If
-
-        If TxtQuantArtic.Text.Trim = "" OrElse TxtQuantArtic.Text = 0 Then
+        ElseIf TxtQuantArtic.Text.Trim = "" OrElse TxtQuantArtic.Text = 0 Then
             MessageBox.Show("Quantità articolo obbligatoria.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             SegnalaErrori(TxtQuantArtic)
             ActiveControl = TxtQuantArtic
             Return False
-        Else
-            Return True
-        End If
-
-
-        If TxtUnitMisur.Text.Trim = "" Then
+        ElseIf TxtUnitMisur.Text.Trim = "" Then
             MessageBox.Show("Unità di misura articolo obbligatoria.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             SegnalaErrori(TxtUnitMisur)
             ActiveControl = TxtUnitMisur
             Return False
-        Else
-            Return True
-        End If
-
-        If TxtQuantMinim.Text.Trim = "" Then
+        ElseIf TxtQuantMinim.Text.Trim = "" Then
             MessageBox.Show("Quantià minima articolo obbligatoria.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             SegnalaErrori(TxtQuantMinim)
             ActiveControl = TxtQuantMinim
             Return False
-        Else
-            Return True
-        End If
-
-        If TxtPrezUnita.Text.Trim = "" Then
+        ElseIf TxtPrezUnita.Text.Trim = "" Then
             MessageBox.Show("Prezzo unitario articolo obbligatoria.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             SegnalaErrori(TxtPrezUnita)
             ActiveControl = TxtPrezUnita
@@ -143,14 +126,15 @@
         End If
 
     End Function
-    Public Sub conferma()
+
+    Private Sub BtnSalva_Click(sender As Object, e As EventArgs) Handles BtnSalva.Click
 
         If vericamp() Then
 
             modi(rowCorpo)
             Try
                 conn.Open()
-                AggiornaDBProdotti(rowCorpo, conn)
+                AggiornaArticoli(rowCorpo, conn)
 
             Catch ex As Exception
                 Console.WriteLine("Errore: " & ex.Message)
@@ -159,18 +143,17 @@
             End Try
 
             If rowCorpo.RowState = DataRowState.Detached Then
-                If TypeOf fp Is Schermata_grs_anagrafica Then
-                    CType(fp, Schermata_grs_anagrafica).dtCorpo.Rows.Add(rowCorpo)
-                    CType(fp, Schermata_grs_anagrafica).dtCorpo.AcceptChanges()
+                If TypeOf fp Is Schermata_grs_inventario Then
+                    CType(fp, Schermata_grs_inventario).dtCorpo.Rows.Add(rowCorpo)
+                    CType(fp, Schermata_grs_inventario).dtCorpo.AcceptChanges()
                 End If
             End If
-            esci()
+            Close()
         End If
     End Sub
-    Public Sub esci()
+    Private Sub BtnEsci_Click(sender As Object, e As EventArgs) Handles BtnEsci.Click
         Close()
     End Sub
-
 
     'setta
     Private Sub settaVaribili()
