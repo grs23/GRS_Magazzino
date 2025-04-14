@@ -48,6 +48,7 @@
         TxtDescReca.Text = row("desc_recap")
     End Sub
     Private Sub modi(ByRef row As DataRow)
+        AzzeraRigo(row, True)
         row("ragi_socia") = TxtRagiSoci.Text
         row("desc_recap") = TxtDescReca.Text
     End Sub
@@ -68,8 +69,8 @@
                         e.Cancel = True
                     End If
                 Else
-                    Dim rigoMezzo As DataRow = New Query().CaricaRigoAnagrafica(conn, tipo_anagrafica, TxtRagiSoci.Text.Trim)
-                    If rigoMezzo.RowState = DataRowState.Unchanged AndAlso (rigoMezzo("id") <> rowCorpo("id")) Then
+                    Dim rigo As DataRow = New Query().CaricaRigoAnagrafica(conn, tipo_anagrafica, TxtRagiSoci.Text.Trim)
+                    If rigo.RowState = DataRowState.Unchanged AndAlso (rigo("id") <> rowCorpo("id")) Then
                         MessageBox.Show(TxtRagiSoci.Text & " già presente.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 
                         e.Cancel = True

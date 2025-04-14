@@ -376,4 +376,41 @@ Public Class Query
             Return 1
         End If
     End Function
+
+
+
+    Public Function CaricaRiepilogoPagamentoDipendenti(conn As IDbConnection, ByVal DallData As Date, ByVal AllaData As Date) As DataTable
+        Dim dt As New DataTable
+        Dim chiudiConn As Boolean = False
+        Try
+            If conn.State <> ConnectionState.Open Then
+                chiudiConn = True
+                conn.Open()
+            End If
+
+            Dim command As IDbCommand = conn.CreateCommand
+
+            command.CommandText = "SELECT pagadipe.desc_dipen as dipendente, sum(pagadipe.impo_pagam) as importopagamento, pagadipe.data_pagam"
+            command.CommandText &= "FROM grs_pagadipe as pagadipe WHERE pagadipe.cancellato = @cancellato "
+            command.CommandText &= "AND pagadipe.data_pagam BETWEEN date(@DallData) AND date(@AllaData) "
+            command.CommandText &= "GROUP BY pagadipe.desc_dipen "
+            command.CommandText &= "GROUP BY pagadipe.data_pagam DESC, pagadipe.desc_dipen"
+
+            AggiungiParametro(command, "@cancellato", False)
+            AggiungiParametro(command, "@DallData", DallData.Date)
+            AggiungiParametro(command, "@AllaData", AllaData.Date)
+
+            Dim reader As IDataReader = command.ExecuteReader()
+
+            dt.Load(reader)
+        Catch ex As Exception
+            Console.WriteLine("Errore : " & ex.Message)
+        Finally
+            If chiudiConn Then
+                conn.Close()
+            End If
+        End Try
+
+        Return dt
+    End Function
 End Class

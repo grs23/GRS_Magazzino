@@ -124,4 +124,13 @@
             Schermata_grs_interventi.Show()
         End If
     End Sub
+
+    Private Sub LblPagamenti_Click(sender As Object, e As EventArgs) Handles LblPagamenti.Click
+        If CheckFormAperto(Schermata_grs_interventi, Application.OpenForms, True) OrElse CheckFormAperto(Schermata_grs_interventi_Modi, Application.OpenForms, True) Then
+            MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        Else
+            Schermata_grs_Pagamenti_dipendenti.fp = Me
+            Schermata_grs_Pagamenti_dipendenti.Show()
+        End If
+    End Sub
 End Class

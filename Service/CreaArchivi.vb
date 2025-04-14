@@ -34,8 +34,7 @@
 
                                                 desc_dipen      VARCHAR(100) DEFAULT '', 
                                                 data_pagam      DATE,
-                                                impo_pagam      NUMERIC(11,2) DEFAULT 0,
-
+                                                impo_pagam      NUMERIC(11,2) DEFAULT 0, 
                                                 desc_pagam      VARCHAR(100) DEFAULT ''
                                                 ) " & motore
 
