@@ -36,6 +36,8 @@ Partial Class MenuGRS
         Me.PnlLogo = New System.Windows.Forms.Panel()
         Me.LblLicenza = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblAggiorna = New System.Windows.Forms.Label()
         Me.PnlBottoniV.SuspendLayout()
         Me.PnlBottoniO.SuspendLayout()
         Me.PnlLogo.SuspendLayout()
@@ -191,6 +193,8 @@ Partial Class MenuGRS
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PnlLogo.BackgroundImage = Global.GRS_Magazzino.My.Resources.Resources.LOGO_FOTO
         Me.PnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PnlLogo.Controls.Add(Me.Label1)
+        Me.PnlLogo.Controls.Add(Me.LblAggiorna)
         Me.PnlLogo.Controls.Add(Me.LblLicenza)
         Me.PnlLogo.Location = New System.Drawing.Point(226, 116)
         Me.PnlLogo.Name = "PnlLogo"
@@ -207,6 +211,32 @@ Partial Class MenuGRS
         Me.LblLicenza.Name = "LblLicenza"
         Me.LblLicenza.Size = New System.Drawing.Size(0, 19)
         Me.LblLicenza.TabIndex = 20
+        '
+        'BackgroundWorker1
+        '
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.White
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Red
+        Me.Label1.Location = New System.Drawing.Point(929, 564)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(0, 17)
+        Me.Label1.TabIndex = 22
+        '
+        'LblAggiorna
+        '
+        Me.LblAggiorna.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.LblAggiorna.AutoSize = True
+        Me.LblAggiorna.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAggiorna.ForeColor = System.Drawing.Color.White
+        Me.LblAggiorna.Location = New System.Drawing.Point(28, 568)
+        Me.LblAggiorna.Name = "LblAggiorna"
+        Me.LblAggiorna.Size = New System.Drawing.Size(0, 15)
+        Me.LblAggiorna.TabIndex = 21
         '
         'MenuGRS
         '
@@ -241,4 +271,6 @@ Partial Class MenuGRS
     Friend WithEvents LblInterventi As Label
     Friend WithEvents LblAcquistoMateriali As Label
     Friend WithEvents LblPagamenti As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents LblAggiorna As Label
 End Class

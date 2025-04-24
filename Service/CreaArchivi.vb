@@ -112,9 +112,9 @@
                                                 desc_clien      VARCHAR(100) DEFAULT '',
 
                                                 cost_inter      NUMERIC(11,2) DEFAULT 0,
-                                                prez_vendi      NUMERIC(11,2) DEFAULT 0
+                                                prez_vendi      NUMERIC(11,2) DEFAULT 0,
 
-                                                desc_lavor      VARCHAR(300) DEFAULT '',
+                                                desc_lavor      VARCHAR(300) DEFAULT ''
                                                 ) " & motore
 
             command.ExecuteNonQuery()
@@ -153,7 +153,7 @@
         End If
     End Sub
 
-    Sub CreaArchiviUtenti()
+    Sub CreaTabellaUtenti()
         Dim motore As String = "ENGINE = MyIsam"
         Dim conn As IDbConnection = GetConnDb()
         Dim SQLstr As String = ""
@@ -162,7 +162,7 @@
         Try
             conn.Open()
 
-            command.CommandText = " CREATE TABLE IF NOT EXISTS grsuten (
+            command.CommandText = " CREATE TABLE IF NOT EXISTS " & TabelleDatabase.tb_utente & " (
                                          id 		      SERIAL,  
                                          cancellato       BOOLEAN DEFAULT FALSE,  
                                          bloccato         VARCHAR(30) DEFAULT '',
@@ -189,30 +189,37 @@
                 Try
                     rigoUten("username") = "ADMIN"
                     rigoUten("password") = "ADMIN"
-                    rigoUten("ruolo") = 0
+                    'rigoUten("ruolo") = 0
                     rigoUten("nickname") = "GRS"
                     rigoUten("nominativo") = "GRS"
-                    rigoUten("email") = "assistenza@si-solinfo.it"
+                    rigoUten("email") = "info.grs23@gmail.com"
                     rigoUten("ctrl_acces") = False
 
-                    'UtentiModi.AggiornaUten(rigoUten, ConnString)
-                    MessageBox.Show("MANCA UtentiModi.AggiornaUten")
+                    AggiornaUtente(rigoUten, conn)
+                    'MessageBox.Show("MANCA UtentiModi.AggiornaUten")
                 Catch ex As Exception
                 End Try
             End If
 
 
-            ''  NomeDB = "gedolgut" 'utente loggato
-            'Dim gedolgut As String = "gedolgut"
-            'SQLstr = "CREATE TABLE IF NOT EXISTS " & gedolgut & "  (
-            '                                    id         SERIAL,  
-            '                                    ctrl_aggio BOOLEAN DEFAULT FALSE,  
-            '                                    desc_aggio VARCHAR(200)
-            '                                    )" & motore
-            'command.CommandText = SQLstr
-            'command.ExecuteNonQuery()
+            command.Dispose()
+        Catch ex As Exception
+            'Log.Error(ex.Message, ex)
+            MessageBox.Show(ex.Message.ToString)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+    Sub CreaTabellaPersonalizzazione()
+        Dim motore As String = "ENGINE = MyIsam"
+        Dim conn As IDbConnection = GetConnDb()
+        Dim SQLstr As String = ""
+        Dim command As IDbCommand = conn.CreateCommand
 
-            command.CommandText = " CREATE TABLE IF NOT EXISTS grs_pers (
+        Try
+            conn.Open()
+
+            command.CommandText = " CREATE TABLE IF NOT EXISTS " & TabelleDatabase.tb_personalizzazione & " (
                                          id 		      SERIAL,  
                                          cancellato       BOOLEAN DEFAULT FALSE, 
 
@@ -235,12 +242,12 @@
             If rigoPers.RowState <> DataRowState.Unchanged Then
                 AzzeraRigo(rigoPers, True)
                 Try
-                    rigoPers("perc_stamp") = "ADMIN"
-                    rigoPers("perc_excel") = "ADMIN"
+                    rigoPers("perc_stamp") = ""
+                    rigoPers("perc_excel") = ""
                     rigoPers("perc_logo") = ""
 
-                    'UtentiModi.AggiornaUten(rigoUten, ConnString)
-                    MessageBox.Show("MANCA UtentiModi.AggiornaPersonalizzazione")
+                    AggioraPersonalizzazione(rigoPers, conn)
+                    'MessageBox.Show("MANCA UtentiModi.AggiornaPersonalizzazione")
                 Catch ex As Exception
                 End Try
             End If

@@ -1,35 +1,62 @@
 ﻿Public Class MenuGRS
     'Public conn As IDbConnection = GetConnDb()
 
-    Public percorso As String = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) & "\GRS"
+    Public boolLice As Boolean = False
+    'Public percorso As String = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) & "\GRS"
+    Public percorso As String = Application.StartupPath
     Public exe As String = Application.ExecutablePath.Replace(percorso & "\", "")
-    Public nomeFileConnessione As String = "GRSConn.cfg"
-    Public percorsoPrincipaleConnessione As String = percorso & "\Programs\" & nomeFileConnessione
+    Public nomeFileConnessione As String = "GRSMagazzinoConn.cfg"
+    Public percorsoPrincipaleConnessione As String = IO.Path.GetPathRoot(percorso) & "\GRS\Programs\" & nomeFileConnessione
     Public versione As String = "2025.04.06.1"
 
     Public rigoUten As DataRow = Nothing
+    Public rigoPers As DataRow = Nothing
     Private Sub MenuGRS_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim dgvType As Type = LblClienti.[GetType]()
         Dim pi As System.Reflection.PropertyInfo = dgvType.GetProperty("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
         pi.SetValue(LblClienti, True, Nothing)
+        InizializzaForm.Init(Me)
         Text &= " " & GRSLib.PrendiVersioneFile(percorso & "\" & exe)
     End Sub
 
     Private Sub MenuGRS_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        'Dim fileConnessioneEsiste As Boolean = IO.File.Exists(percorsoPrincipaleConnessione)
+        Try
+            If Process.GetProcessesByName(IO.Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).AsEnumerable().Where(Function(p) p.MainModule.FileName = percorso & "\" & exe AndAlso p.Id <> Process.GetCurrentProcess.Id).Any Then
+                MessageBox.Show("Il programma è già in esecuzione", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+                End
+            Else
 
-        'If Service.LeggiFileConnessione(If(fileConnessioneEsiste, percorsoPrincipaleConnessione, percorso & "\" & nomeFileConnessione), Not fileConnessioneEsiste OrElse IO.File.Exists(percorso & "\" & nomeFileConnessione)) Then
-        '    'CreaArchivi.CreaTabellaLicenza()
-        '    'CreaArchivi.ModificaTabellaLicenza()
-        '    'CreaArchivi.CreaRigoLicenza()
-        '    CreaArchivi.CreaArchivi(False)
-        '    'CreaArchivi.CreaArchiviUtenti()
-        '    'login.fp = Me
-        '    'login.Show()
-        'Else
-        '    End
-        'End If
+            End If
+        Catch ex As Exception
+        End Try
+        If IO.File.Exists(percorso & "\GRSMagazzinoConfig\" & nomeFileConnessione) Then
+            percorsoPrincipaleConnessione = percorso & "\GRSMagazzinoConfig\" & nomeFileConnessione
+        End If
 
+        Dim fileConnessioneEsiste As Boolean = IO.File.Exists(percorsoPrincipaleConnessione)
+
+        If Service.LeggiFileConnessione(If(fileConnessioneEsiste,
+                                        percorsoPrincipaleConnessione,
+                                        percorso & "\" & nomeFileConnessione),
+                                        Not fileConnessioneEsiste OrElse IO.File.Exists(percorso & "\" & nomeFileConnessione)) Then
+            'Crea_Archivi.CreaTabellaLicenza()
+            'ModificaTabelle.ModificaTabellaLicenza()
+            'Crea_Archivi.CreaRigoLicenza()
+
+            CreaArchivi.CreaTabellaUtenti()
+            CreaArchivi.CreaTabellaPersonalizzazione()
+            'ModificaTabelle.ModificaTabellaUtenti()
+            Login.fp = Me
+            Login.Show()
+
+
+            'LETTURA FILE SETTAGGI
+            '       If IO.File.Exists(percorsoSettaggi) Then
+            'Service.LeggiFileSettaggi(percorsoSettaggi)
+            '      End If
+        Else
+            End
+        End If
     End Sub
 
     Private Sub MenuGRS_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -47,6 +74,61 @@
 
         End If
     End Sub
+    Public Sub LanciaRoutine()
+        BackgroundWorker1.RunWorkerAsync()
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        Try
+            '-----------------------------------
+
+            BGW.CambiaTestoLabel(LblAggiorna, "Verifica Licenza")
+            'boolLice = controlloLicenza()
+            If boolLice Then
+                BGW.CambiaTestoLabel(LblAggiorna, "")
+            Else
+                BGW.CambiaTestoLabel(LblAggiorna, "")
+                'BGW.CambiaTestoLabel(LblAggiorna, "Verifico Aggiornamenti")
+                'AggiornaLabel("Verifico Aggiornamenti", True)
+                'If Aggiornamenti.VersEAggi(percorso, exe, versione, , False,,,,, Me) = True Then
+                '    Close()
+                'Else
+                BGW.CambiaTestoLabel(LblAggiorna, "")
+                    'AggiornaLabel()
+                    'If rigoUten("username") = "ADMIN" Then
+                    '    CreaArchivi()
+                    'End If
+
+                    Dim conn As MySqlConnection = GetConnDb()
+                    ' If dbesiste(NomeDB) = True Then
+                    'EliminaElementiDuplicati(conn)
+                    BGW.CambiaTestoLabel(LblAggiorna, "Verifica Struttura Dati")
+                CreaArchivi.CreaArchivi(False)
+                CreaIndici(False)
+                    BGW.CambiaTestoLabel(LblAggiorna, "")
+
+
+                ModificaTabelle.Modifica()
+                '----------------------------------------------- 
+                BGW.CambiaTestoLabel(LblAggiorna, "")
+
+                '-----------------------------------------------
+                '-----------------------------------
+
+
+                'End If
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            BGW.CambiaTestoLabel(LblAggiorna, "")
+        End Try
+    End Sub
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        If boolLice = False Then
+            Me.Enabled = True
+        End If
+    End Sub
+
 
     Private Sub Verticale_MouseEnter(sender As Object, e As EventArgs) Handles LblPagamenti.MouseEnter, LblAcquistoMateriali.MouseEnter, LblInterventi.MouseEnter
         CType(sender, Label).MaximumSize = New Size(200, 110)

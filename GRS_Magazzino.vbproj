@@ -136,6 +136,12 @@
     <Compile Include="Inventario\Schermata_grs_inventario_Modi.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Login\Login.Designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Menu\MenuGRS.Designer.vb">
       <DependentUpon>MenuGRS.vb</DependentUpon>
     </Compile>
@@ -171,6 +177,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Service\CreaArchivi.vb" />
+    <Compile Include="Service\Indici.vb" />
+    <Compile Include="Service\ModificaTabelle.vb" />
     <Compile Include="Service\ModuloGenerale.vb" />
     <Compile Include="Service\Query.vb" />
     <Compile Include="Service\RegiData.vb" />
@@ -196,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario\Schermata_grs_inventario_Modi.resx">
       <DependentUpon>Schermata_grs_inventario_Modi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuGRS.resx">
       <DependentUpon>MenuGRS.vb</DependentUpon>

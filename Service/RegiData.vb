@@ -576,6 +576,194 @@
     End Sub
 
 
+    Public Sub AggiornaUtente(ByRef rowD As DataRow, conn As MySqlConnection)
+        Try
+            If IsDBNull(rowD("cancellato")) = False AndAlso rowD("cancellato") = True Then
+                If rowD.RowState <> DataRowState.Added AndAlso rowD.RowState <> DataRowState.Detached AndAlso rowD("id") <> 0 Then
+                    CancRigo(conn, TabelleDatabase.tb_utente, rowD("id"))
+                End If
+            ElseIf rowD.RowState = DataRowState.Added OrElse rowD.RowState = DataRowState.Detached Then
+                regiUtente(conn, True, TabelleDatabase.tb_utente, rowD)
+            ElseIf rowD.RowState = DataRowState.Modified Then
+                regiUtente(conn, False, TabelleDatabase.tb_utente, rowD)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Errore durante la conferma: " & ex.Message, "Errore...", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        Finally
+        End Try
+    End Sub
+    Private Sub regiUtente(ByVal conn As MySqlConnection, ctrlimmi As Boolean, tabella As String, row As DataRow)
+        Dim SQLstr As String
+        ' MsgBox(tabella)
+        Dim ChiudiConn As Boolean = False
+        If conn.State = ConnectionState.Closed Then
+            conn.Open()
+            ChiudiConn = True
+        End If
+        Dim Command = New MySqlCommand()
+        Command.Connection = conn
+        Try
+            If ctrlimmi = True Then
+                SQLstr = "INSERT INTO " & tabella & " (
+                                               cancellato,
+                                               bloccato,
+                                               username,
+                                               password, 
+                                               nominativo,
+                                               nickname,
+                                               email,
+                                               ctrl_acces,
+                                               uten_inser,
+                                               uten_aggio,
+                                               uten_cance)
+                                           VALUES 
+                                              (@cancellato,
+                                               @bloccato,
+                                               @username,
+                                               @password, 
+                                               @nominativo,
+                                               @nickname,
+                                               @email,
+                                               @ctrl_acces, 
+                                               @uten_inser,
+                                               @uten_aggio,
+                                               @uten_cance)"
+
+            Else
+                SQLstr = "UPDATE " & tabella & " SET 
+                                               cancellato = @cancellato,
+                                               bloccato   = @bloccato,
+                                               username   = @username,
+                                               password   = @password, 
+                                               nominativo = @nominativo,
+                                               nickname   = @nickname,
+                                               email      = @email,
+                                               ctrl_acces = @ctrl_acces, 
+
+                                        	   uten_aggio = @uten_aggio,
+                                               uten_cance = @uten_cance
+                                               WHERE id   = @id"
+            End If
+            If Not ctrlimmi Then
+                Command.Parameters.AddWithValue("@id", row("id"))
+            Else
+                Command.Parameters.AddWithValue("@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
+            End If
+            Command.CommandText = SQLstr
+            Command.Parameters.AddWithValue("@cancellato", canc)
+            Command.Parameters.AddWithValue("@bloccato", " ")
+            Command.Parameters.AddWithValue("@username", row("username"))
+            Command.Parameters.AddWithValue("@password", row("password"))
+            Command.Parameters.AddWithValue("@nominativo", row("nominativo"))
+            Command.Parameters.AddWithValue("@nickname", row("nickname"))
+            Command.Parameters.AddWithValue("@email", row("email"))
+            Command.Parameters.AddWithValue("@ctrl_acces", row("ctrl_acces"))
+
+            Command.Parameters.AddWithValue("@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            Command.Parameters.AddWithValue("@uten_cance", "")
+
+            EseguiQueryAssegnazioneID(Command, tabella, row)
+            Command.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString)
+        Finally
+            If ChiudiConn Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+
+    Public Sub AggioraPersonalizzazione(ByRef rowD As DataRow, conn As MySqlConnection)
+        Try
+            If IsDBNull(rowD("cancellato")) = False AndAlso rowD("cancellato") = True Then
+                If rowD.RowState <> DataRowState.Added AndAlso rowD.RowState <> DataRowState.Detached AndAlso rowD("id") <> 0 Then
+                    CancRigo(conn, TabelleDatabase.tb_personalizzazione, rowD("id"))
+                End If
+            ElseIf rowD.RowState = DataRowState.Added OrElse rowD.RowState = DataRowState.Detached Then
+                regiPersonalizzazione(conn, True, TabelleDatabase.tb_personalizzazione, rowD)
+            ElseIf rowD.RowState = DataRowState.Modified Then
+                regiPersonalizzazione(conn, False, TabelleDatabase.tb_personalizzazione, rowD)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Errore durante la conferma: " & ex.Message, "Errore...", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        Finally
+        End Try
+    End Sub
+    Private Sub regiPersonalizzazione(ByVal conn As MySqlConnection, ctrlimmi As Boolean, tabella As String, row As DataRow)
+        Dim SQLstr As String
+        ' MsgBox(tabella)
+        Dim ChiudiConn As Boolean = False
+        If conn.State = ConnectionState.Closed Then
+            conn.Open()
+            ChiudiConn = True
+        End If
+        Dim Command = New MySqlCommand()
+        Command.Connection = conn
+        Try
+            If ctrlimmi = True Then
+                SQLstr = "INSERT INTO " & tabella & " (
+                                               cancellato,
+                                               bloccato,  
+
+                                               perc_stamp,
+                                               perc_excel,
+                                               perc_logo,
+
+                                               uten_inser,
+                                               uten_aggio,
+                                               uten_cance
+                                              )
+                                           VALUES 
+                                              (@cancellato,
+                                               @bloccato,
+
+                                               @perc_stamp,
+                                               @perc_excel,
+                                               @perc_logo,
+ 
+                                               @uten_inser,
+                                               @uten_aggio,
+                                               @uten_cance)"
+
+            Else
+                SQLstr = "UPDATE " & tabella & " SET 
+                                               cancellato = @cancellato,
+                                               bloccato   = @bloccato,
+
+                                               perc_stamp = @perc_stamp,
+                                               perc_excel = @perc_excel,
+                                               perc_logo  = @perc_logo,
+
+                                        	   uten_aggio = @uten_aggio,
+                                               uten_cance = @uten_cance
+                                               WHERE id   = @id"
+            End If
+            If Not ctrlimmi Then
+                Command.Parameters.AddWithValue("@id", row("id"))
+            Else
+                Command.Parameters.AddWithValue("@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
+            End If
+            Command.CommandText = SQLstr
+            Command.Parameters.AddWithValue("@cancellato", canc)
+            Command.Parameters.AddWithValue("@bloccato", " ")
+
+            Command.Parameters.AddWithValue("@perc_stamp", row("perc_stamp"))
+            Command.Parameters.AddWithValue("@perc_excel", row("perc_excel"))
+            Command.Parameters.AddWithValue("@perc_logo", row("perc_logo"))
+
+            Command.Parameters.AddWithValue("@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            Command.Parameters.AddWithValue("@uten_cance", "")
+
+            EseguiQueryAssegnazioneID(Command, tabella, row)
+            Command.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString)
+        Finally
+            If ChiudiConn Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
 
     'CANCELLAZIONE
     Public Sub CancRigo(ByVal conn As IDbConnection, ByVal tabella As String, ByVal id As Integer)
@@ -592,12 +780,12 @@
 
             SQLstr = "UPDATE " & tabella & " SET 
                                              cancellato = @cancellato,
-                                             uten_canc = @uten_canc
+                                             uten_cance = @uten_cance
                                              WHERE id = @id"
             Command.CommandText = SQLstr
             AggiungiParametro(Command, "@id", id)
             AggiungiParametro(Command, "@cancellato", True)
-            AggiungiParametro(Command, "@uten_canc", Service.UtenteDelMomento(Nothing, "uten_canc"))
+            AggiungiParametro(Command, "@uten_cance", Service.UtenteDelMomento(Nothing, "uten_cance"))
             AggiungiParametro(Command, "@bloccato", " ")
             If Command.ExecuteNonQuery() = 0 Then
                 MessageBox.Show("operazione non riuscita!", "errore....", MessageBoxButtons.OK, MessageBoxIcon.Error)

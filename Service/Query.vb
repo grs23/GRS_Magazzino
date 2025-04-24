@@ -1,5 +1,6 @@
 Public Class Query
 
+
     Public Function CaricaPersonalizzazione(conn As IDbConnection) As DataRow
         Dim row As DataRow
         Dim dt As New DataTable
@@ -13,7 +14,7 @@ Public Class Query
 
             Dim command As IDbCommand = conn.CreateCommand
             command.Connection = conn
-            command.CommandText = "SELECT * FROM grspers WHERE cancellato != @cancellato "
+            command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_personalizzazione & "  WHERE cancellato != @cancellato "
 
             AggiungiParametro(command, "@cancellato", True)
             Dim reader As IDataReader = command.ExecuteReader()
@@ -52,7 +53,7 @@ Public Class Query
 
             Dim command As IDbCommand = conn.CreateCommand
             command.Connection = conn
-            command.CommandText = "SELECT * FROM grsuten WHERE cancellato != @cancellato "
+            command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_utente & "  WHERE cancellato != @cancellato "
 
             AggiungiParametro(command, "@cancellato", True)
 
@@ -93,7 +94,7 @@ Public Class Query
         Return dt.Copy
     End Function
     Public Function CaricaUtenti(conn As IDbConnection, Optional AdminIncluso As Boolean = False, Optional GestoreIncluso As Boolean = True) As DataTable
-        Dim dt As DataTable = CaricaUtenti(conn, Nothing, Nothing, False, AdminIncluso, GestoreIncluso)
+        Dim dt As DataTable = CaricaUtenti(conn, "", "", False, AdminIncluso, GestoreIncluso)
         Return dt
     End Function
 
@@ -133,7 +134,7 @@ Public Class Query
 
             Dim command As IDbCommand = conn.CreateCommand
 
-            command.CommandText = "SELECT * FROM grsanag WHERE cancellato = @cancellato "
+            command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_anagrafica & " WHERE cancellato = @cancellato "
             command.CommandText &= "AND tipo_anagr = @tipo_anagr "
 
             AggiungiParametro(command, "@cancellato", False)
@@ -184,7 +185,7 @@ Public Class Query
 
             Dim command As IDbCommand = conn.CreateCommand
 
-            command.CommandText = "SELECT * FROM grs_articoli WHERE cancellato = @cancellato "
+            command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_articoli & "  WHERE cancellato = @cancellato "
 
             AggiungiParametro(command, "@cancellato", False)
 
@@ -391,7 +392,7 @@ Public Class Query
             Dim command As IDbCommand = conn.CreateCommand
 
             command.CommandText = "SELECT pagadipe.desc_dipen as dipendente, sum(pagadipe.impo_pagam) as importopagamento, pagadipe.data_pagam"
-            command.CommandText &= "FROM grs_pagadipe as pagadipe WHERE pagadipe.cancellato = @cancellato "
+            command.CommandText &= "FROM " & TabelleDatabase.tb_pagamento_dipendente & "  as pagadipe WHERE pagadipe.cancellato = @cancellato "
             command.CommandText &= "AND pagadipe.data_pagam BETWEEN date(@DallData) AND date(@AllaData) "
             command.CommandText &= "GROUP BY pagadipe.desc_dipen "
             command.CommandText &= "GROUP BY pagadipe.data_pagam DESC, pagadipe.desc_dipen"

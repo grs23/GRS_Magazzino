@@ -6,4 +6,6 @@
     Public Const tb_giacenza_articoli As String = "grs_giacarti"
     Public Const tb_intervento_testata As String = "grs_intetest"
     Public Const tb_intervento_dettaglio As String = "grs_intedett"
+    Public Const tb_utente As String = "grs_utente"
+    Public Const tb_personalizzazione As String = "grs_personalizzazione"
 End Class
