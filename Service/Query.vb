@@ -292,8 +292,8 @@ Public Class Query
         End If
     End Function
     Public Function CaricaInterventiDettagliLista(conn As IDbConnection,
-                                          Optional anno_inter As Integer = 0, Optional desc_artic As String = "") As DataTable
-        Dim dt As DataTable = CaricaInterventiDettagli(conn, anno_inter, 0, desc_artic)
+                                          Optional anno_inter As Integer = 0, Optional nume_inter As Integer = 0) As DataTable
+        Dim dt As DataTable = CaricaInterventiDettagli(conn, anno_inter, nume_inter, "")
         Return dt
     End Function
 

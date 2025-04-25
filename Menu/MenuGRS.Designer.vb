@@ -30,14 +30,15 @@ Partial Class MenuGRS
         Me.LblDipendenti = New System.Windows.Forms.Label()
         Me.LblClienti = New System.Windows.Forms.Label()
         Me.PnlBottoniO = New System.Windows.Forms.Panel()
+        Me.LblRiepilogoInterventi = New System.Windows.Forms.Label()
         Me.LblInterventi = New System.Windows.Forms.Label()
         Me.LblAcquistoMateriali = New System.Windows.Forms.Label()
         Me.LblPagamenti = New System.Windows.Forms.Label()
         Me.PnlLogo = New System.Windows.Forms.Panel()
-        Me.LblLicenza = New System.Windows.Forms.Label()
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblAggiorna = New System.Windows.Forms.Label()
+        Me.LblLicenza = New System.Windows.Forms.Label()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.PnlBottoniV.SuspendLayout()
         Me.PnlBottoniO.SuspendLayout()
         Me.PnlLogo.SuspendLayout()
@@ -126,6 +127,7 @@ Partial Class MenuGRS
         Me.PnlBottoniO.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PnlBottoniO.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(77, Byte), Integer))
+        Me.PnlBottoniO.Controls.Add(Me.LblRiepilogoInterventi)
         Me.PnlBottoniO.Controls.Add(Me.LblInterventi)
         Me.PnlBottoniO.Controls.Add(Me.LblAcquistoMateriali)
         Me.PnlBottoniO.Controls.Add(Me.LblPagamenti)
@@ -134,6 +136,23 @@ Partial Class MenuGRS
         Me.PnlBottoniO.Name = "PnlBottoniO"
         Me.PnlBottoniO.Size = New System.Drawing.Size(956, 110)
         Me.PnlBottoniO.TabIndex = 5
+        '
+        'LblRiepilogoInterventi
+        '
+        Me.LblRiepilogoInterventi.BackColor = System.Drawing.Color.Transparent
+        Me.LblRiepilogoInterventi.Dock = System.Windows.Forms.DockStyle.Left
+        Me.LblRiepilogoInterventi.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblRiepilogoInterventi.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.LblRiepilogoInterventi.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.LblRiepilogoInterventi.ImageIndex = 7
+        Me.LblRiepilogoInterventi.ImageList = Me.ImageListMenu
+        Me.LblRiepilogoInterventi.Location = New System.Drawing.Point(600, 0)
+        Me.LblRiepilogoInterventi.MaximumSize = New System.Drawing.Size(200, 100)
+        Me.LblRiepilogoInterventi.Name = "LblRiepilogoInterventi"
+        Me.LblRiepilogoInterventi.Size = New System.Drawing.Size(200, 100)
+        Me.LblRiepilogoInterventi.TabIndex = 12
+        Me.LblRiepilogoInterventi.Text = "Riepilogo Interventi"
+        Me.LblRiepilogoInterventi.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'LblInterventi
         '
@@ -201,20 +220,6 @@ Partial Class MenuGRS
         Me.PnlLogo.Size = New System.Drawing.Size(956, 604)
         Me.PnlLogo.TabIndex = 6
         '
-        'LblLicenza
-        '
-        Me.LblLicenza.AutoSize = True
-        Me.LblLicenza.BackColor = System.Drawing.Color.White
-        Me.LblLicenza.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.LblLicenza.ForeColor = System.Drawing.Color.Red
-        Me.LblLicenza.Location = New System.Drawing.Point(567, 568)
-        Me.LblLicenza.Name = "LblLicenza"
-        Me.LblLicenza.Size = New System.Drawing.Size(0, 19)
-        Me.LblLicenza.TabIndex = 20
-        '
-        'BackgroundWorker1
-        '
-        '
         'Label1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -237,6 +242,20 @@ Partial Class MenuGRS
         Me.LblAggiorna.Name = "LblAggiorna"
         Me.LblAggiorna.Size = New System.Drawing.Size(0, 15)
         Me.LblAggiorna.TabIndex = 21
+        '
+        'LblLicenza
+        '
+        Me.LblLicenza.AutoSize = True
+        Me.LblLicenza.BackColor = System.Drawing.Color.White
+        Me.LblLicenza.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.LblLicenza.ForeColor = System.Drawing.Color.Red
+        Me.LblLicenza.Location = New System.Drawing.Point(567, 568)
+        Me.LblLicenza.Name = "LblLicenza"
+        Me.LblLicenza.Size = New System.Drawing.Size(0, 19)
+        Me.LblLicenza.TabIndex = 20
+        '
+        'BackgroundWorker1
+        '
         '
         'MenuGRS
         '
@@ -273,4 +292,5 @@ Partial Class MenuGRS
     Friend WithEvents LblPagamenti As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents LblAggiorna As Label
+    Friend WithEvents LblRiepilogoInterventi As Label
 End Class

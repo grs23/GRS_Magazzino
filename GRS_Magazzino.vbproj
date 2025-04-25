@@ -164,6 +164,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Riepiloghi\Schermata_grs_riepilogo_interventi.Designer.vb">
+      <DependentUpon>Schermata_grs_riepilogo_interventi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Riepiloghi\Schermata_grs_riepilogo_interventi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Schermata_grs_pagamenti_dipendenti.Designer.vb">
       <DependentUpon>Schermata_grs_pagamenti_dipendenti.vb</DependentUpon>
     </Compile>
@@ -216,6 +222,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Riepiloghi\Schermata_grs_riepilogo_interventi.resx">
+      <DependentUpon>Schermata_grs_riepilogo_interventi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Schermata_grs_pagamenti_dipendenti.resx">
       <DependentUpon>Schermata_grs_pagamenti_dipendenti.vb</DependentUpon>

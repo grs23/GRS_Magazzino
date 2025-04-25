@@ -5,6 +5,8 @@
     Public rigoTestata As DataRow = Nothing
     Public dtCorpo As New DataTable
 
+    Public rigoRiepilogo As DataRow = Nothing
+
     Public Const tipo_cliente As String = "C"
 
     Protected Overrides Sub WndProc(ByRef m As Message)
@@ -26,7 +28,14 @@
 
         Field.ScrollingContextMenu(True, True, True, DgvCorpo)
 
-        SettaVariabili()
+        If rigoRiepilogo Is Nothing Then
+            SettaVariabili()
+        Else
+            TxtAnnoInte.Text = rigoRiepilogo("anno_inter")
+            TxtNumeInte.Text = rigoRiepilogo("nume_inter")
+
+            Carica()
+        End If
     End Sub
 
     Private Sub TxtNumeInte_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles TxtNumeInte.PreviewKeyDown
@@ -140,7 +149,44 @@
                 AggiornaInterventoDettaglio(rigoDettaglio, conn)
             Next
 
-            SettaVariabili()
+            If rigoRiepilogo IsNot Nothing Then
+                For Each col As DataColumn In rigoRiepilogo.Table.Columns
+                    If rigoTestata.Table.Columns.Contains(col.ColumnName) Then
+                        rigoRiepilogo(col.ColumnName) = rigoTestata(col.ColumnName)
+                    End If
+                Next
+
+                If rigoRiepilogo.RowState = DataRowState.Detached Then
+                    rigoRiepilogo.Table.Rows.Add(rigoRiepilogo)
+                End If
+
+                rigoRiepilogo.AcceptChanges()
+            End If
+
+            If TypeOf fp Is MenuGRS Then
+                BtnNuovo.PerformClick()
+            Else
+                If TypeOf fp Is Schermata_grs_riepilogo_interventi Then
+                    'Schermata_grs_riepilogo_interventi.Carica()
+
+                    'Dim rigaTrovata = (From r In rigoRiepilogo.Table.AsEnumerable()
+                    '                   Where r.Field(Of String)("id") = rigoRiepilogo("id")
+                    '                   Select r).FirstOrDefault()
+
+                    'If rigaTrovata IsNot Nothing Then
+                    If rigoRiepilogo IsNot Nothing Then
+                            ' Trova l'indice della riga nel DataTable
+                            Dim indice As Integer = rigoRiepilogo.Table.Rows.IndexOf(rigoRiepilogo)
+
+                            ' Posizionati e seleziona la riga nel DataGridView
+                            Schermata_grs_riepilogo_interventi.DgvCorpo.ClearSelection()
+                            Schermata_grs_riepilogo_interventi.DgvCorpo.Rows(indice).Selected = True
+                            Schermata_grs_riepilogo_interventi.DgvCorpo.FirstDisplayedScrollingRowIndex = indice
+                        End If
+                    End If
+
+                BtnEsci.PerformClick()
+            End If
         Catch ex As Exception
             MessageBox.Show("Errore: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
         Finally
@@ -160,7 +206,11 @@
                     Service.CancRigo(TabelleDatabase.tb_intervento_dettaglio, DgvCorpo.CurrentRow.DataBoundItem.row("id"), conn, False)
                 Next
 
-                SettaVariabili()
+                If TypeOf fp Is MenuGRS Then
+                    BtnNuovo.PerformClick()
+                Else
+                    BtnEsci.PerformClick()
+                End If
             End If
         Catch ex As Exception
         Finally
@@ -201,7 +251,7 @@
                 PnlCorpo.Enabled = True
 
                 BtnSalva.Enabled = True
-                BtnNuovo.Enabled = True
+                BtnNuovo.Enabled = TypeOf fp Is MenuGRS
                 BtnCancella.Enabled = True
 
                 PnlTestata.Enabled = False
