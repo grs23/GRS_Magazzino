@@ -65,9 +65,9 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         'BtnAnnulla
         '
         Me.BtnAnnulla.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnAnnulla.Location = New System.Drawing.Point(721, 23)
+        Me.BtnAnnulla.Location = New System.Drawing.Point(740, 23)
         Me.BtnAnnulla.Name = "BtnAnnulla"
-        Me.BtnAnnulla.Size = New System.Drawing.Size(100, 23)
+        Me.BtnAnnulla.Size = New System.Drawing.Size(138, 26)
         Me.BtnAnnulla.TabIndex = 235
         Me.BtnAnnulla.Text = "<F8> Annulla"
         Me.TltTabella.SetToolTip(Me.BtnAnnulla, "<F8> Annulla")
@@ -78,7 +78,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.BtnFiltra.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnFiltra.Location = New System.Drawing.Point(596, 23)
         Me.BtnFiltra.Name = "BtnFiltra"
-        Me.BtnFiltra.Size = New System.Drawing.Size(100, 23)
+        Me.BtnFiltra.Size = New System.Drawing.Size(138, 26)
         Me.BtnFiltra.TabIndex = 234
         Me.BtnFiltra.Text = "<F7> Filtra"
         Me.TltTabella.SetToolTip(Me.BtnFiltra, "<F7> Filtra")
@@ -100,6 +100,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.TxtRicerca.Name = "TxtRicerca"
         Me.TxtRicerca.Size = New System.Drawing.Size(192, 20)
         Me.TxtRicerca.TabIndex = 231
+        Me.TltTabella.SetToolTip(Me.TxtRicerca, "Ricerca")
         '
         'Label2
         '
@@ -110,9 +111,9 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Location = New System.Drawing.Point(18, 7)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(83, 15)
+        Me.Label2.Size = New System.Drawing.Size(56, 15)
         Me.Label2.TabIndex = 230
-        Me.Label2.Text = "Descrizione"
+        Me.Label2.Text = "Ricerca"
         '
         'StsTabella
         '
@@ -176,6 +177,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCorpo.Size = New System.Drawing.Size(1074, 516)
         Me.DgvCorpo.TabIndex = 0
+        Me.TltTabella.SetToolTip(Me.DgvCorpo, "<Inse> Inserim. - <Enter> Modifica - <Canc> Cancella")
         '
         'ClnDipendente
         '
@@ -228,6 +230,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.TxtDallData.Size = New System.Drawing.Size(82, 20)
         Me.TxtDallData.TabIndex = 554
         Me.TxtDallData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TltTabella.SetToolTip(Me.TxtDallData, "Dalla data")
         Me.TxtDallData.ValidatingType = GetType(Date)
         '
         'Label1
@@ -235,7 +238,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(14, 7)
+        Me.Label1.Location = New System.Drawing.Point(14, 4)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(75, 15)
         Me.Label1.TabIndex = 556
@@ -251,6 +254,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.TxtAllaData.Size = New System.Drawing.Size(82, 20)
         Me.TxtAllaData.TabIndex = 555
         Me.TxtAllaData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TltTabella.SetToolTip(Me.TxtAllaData, "Alla data")
         Me.TxtAllaData.ValidatingType = GetType(Date)
         '
         'Label4
@@ -258,7 +262,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(143, 7)
+        Me.Label4.Location = New System.Drawing.Point(143, 4)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(65, 15)
         Me.Label4.TabIndex = 557

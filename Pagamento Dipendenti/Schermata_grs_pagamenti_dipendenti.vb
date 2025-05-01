@@ -17,6 +17,8 @@
     Private Sub Schermata_grs_anagrafica_Load(sender As Object, e As EventArgs) Handles Me.Load
         InizializzaForm.Init(Me, fp)
         Field.ScrollingContextMenu(True, True, True, DgvCorpo)
+
+        ImpostaTemaChiaro(Me)
         DgvCorpo.DataSource = dtCorpo
         DgvCorpo.AutoGenerateColumns = False
         settaVariabili()
@@ -61,18 +63,17 @@
 
 
     Private Sub Modi(Optional rowAppo As DataRow = Nothing)
-        If CheckFormAperto(Schermata_grs_anagrafica_Modi, My.Application.OpenForms) = False Then
-            Schermata_grs_anagrafica_Modi.fp = Me
-            Schermata_grs_anagrafica_Modi.tipo_anagrafica = tipo_anagrafica
+        If CheckFormAperto(Schermata_grs_Pagamenti_dipendenti_Modi, My.Application.OpenForms) = False Then
+            Schermata_grs_Pagamenti_dipendenti_Modi.fp = Me
+            Schermata_grs_Pagamenti_dipendenti_Modi.tipo_anagrafica = tipo_dipendente
 
             If rowAppo IsNot Nothing Then
-                Schermata_grs_anagrafica_Modi.rowCorpo = rowAppo
+                Schermata_grs_Pagamenti_dipendenti_Modi.rowCorpo = rowAppo
             Else
-                Schermata_grs_anagrafica_Modi.rowCorpo = dtCorpo.NewRow
-                Schermata_grs_anagrafica_Modi.rowCorpo("cancellato") = False
+                Schermata_grs_Pagamenti_dipendenti_Modi.rowCorpo = dtCorpo.NewRow
             End If
 
-            Schermata_grs_anagrafica_Modi.Show()
+            Schermata_grs_Pagamenti_dipendenti_Modi.Show()
         Else
             MessageBox.Show("E' gia in corso una variazione.", "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
         End If

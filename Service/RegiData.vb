@@ -41,28 +41,18 @@
                 SQLstr = "INSERT INTO " & tabella & " (
                                                 cancellato,  
                                                 bloccato,
-                                                nome,
-                                                cognome,
-                                                telefono,
-                                                cellulare,
-                                                indirizzo,
-                                                note,
-                                                email,
-                                                iban,
+                                                tipo_anagr,
+                                                ragi_socia,
+                                                desc_recap, 
                                                 uten_inser,
                                                 uten_aggio,
                                                 uten_cance)
                                            VALUES 
                                               (@cancellato,
                                                @bloccato,
-                                               @nome,
-                                               @cognome,
-                                               @telefono,
-                                               @cellulare,
-                                               @indirizzo,
-                                               @note,
-                                               @email,
-                                               @iban,
+                                               @tipo_anagr,
+                                               @ragi_socia,
+                                               @desc_recap, 
                                                @uten_inser,
                                                @uten_aggio,
                                                @uten_cance)"
@@ -71,14 +61,9 @@
                 SQLstr = "UPDATE " & tabella & " SET 
                                                cancellato   = @cancellato,
                                                bloccato     = @bloccato,
-                                               nome         = @nome,
-                                               cognome      = @cognome,
-                                               telefono     = @telefono,
-                                               cellulare    = @cellulare,
-                                               indirizzo    = @indirizzo,
-                                               note         = @note,
-                                               email        = @email,
-                                               iban         = @iban,
+                                               tipo_anagr   = @tipo_anagr,
+                                               ragi_socia   = @ragi_socia,
+                                               desc_recap   = @desc_recap, 
                                                
                                                uten_aggio   = @uten_aggio,
                                                uten_cance   = @uten_cance
@@ -87,21 +72,16 @@
             If Not ctrlimmi Then
                 AggiungiParametro(Command, "@id", row("id"))
             Else
-                AggiungiParametro(Command, "@uten_inse", Service.UtenteDelMomento(row, "uten_inse"))
+                AggiungiParametro(Command, "@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
             End If
             Command.CommandText = SQLstr
             AggiungiParametro(Command, "@cancellato", canc)
             AggiungiParametro(Command, "@bloccato", " ")
-            AggiungiParametro(Command, "@nome", row("nome"))
-            AggiungiParametro(Command, "@cognome", row("cognome"))
-            AggiungiParametro(Command, "@telefono", row("telefono"))
-            AggiungiParametro(Command, "@cellulare", row("cellulare"))
-            AggiungiParametro(Command, "@indirizzo", row("indirizzo"))
-            AggiungiParametro(Command, "@note", row("note"))
-            AggiungiParametro(Command, "@email", row("email"))
-            AggiungiParametro(Command, "@iban", row("iban"))
-            AggiungiParametro(Command, "@uten_aggi", Service.UtenteDelMomento(row, "uten_aggi"))
-            AggiungiParametro(Command, "@uten_canc", "")
+            AggiungiParametro(Command, "@tipo_anagr", row("tipo_anagr"))
+            AggiungiParametro(Command, "@ragi_socia", row("ragi_socia"))
+            AggiungiParametro(Command, "@desc_recap", row("desc_recap"))
+            AggiungiParametro(Command, "@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            AggiungiParametro(Command, "@uten_cance", "")
 
             EseguiQueryAssegnazioneID(Command, tabella, row)
             Command.Dispose()
@@ -194,7 +174,7 @@
             If Not ctrlimmi Then
                 AggiungiParametro(Command, "@id", row("id"))
             Else
-                AggiungiParametro(Command, "@uten_inse", Service.UtenteDelMomento(row, "uten_inse"))
+                AggiungiParametro(Command, "@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
             End If
             Command.CommandText = SQLstr
             AggiungiParametro(Command, "@cancellato", canc)
@@ -204,8 +184,8 @@
             AggiungiParametro(Command, "@unit_misur", row("unit_misur"))
             AggiungiParametro(Command, "@quan_artic", row("quan_artic"))
             AggiungiParametro(Command, "@quan_minim", row("quan_minim"))
-            AggiungiParametro(Command, "@uten_aggi", Service.UtenteDelMomento(row, "uten_aggi"))
-            AggiungiParametro(Command, "@uten_canc", "")
+            AggiungiParametro(Command, "@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            AggiungiParametro(Command, "@uten_cance", "")
 
             EseguiQueryAssegnazioneID(Command, tabella, row)
             Command.Dispose()
@@ -321,7 +301,7 @@
             If Not ctrlimmi Then
                 AggiungiParametro(Command, "@id", row("id"))
             Else
-                AggiungiParametro(Command, "@uten_inse", Service.UtenteDelMomento(row, "uten_inse"))
+                AggiungiParametro(Command, "@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
             End If
             Command.CommandText = SQLstr
             AggiungiParametro(Command, "@cancellato", canc)
@@ -338,8 +318,8 @@
             AggiungiParametro(Command, "@cost_inter", row("cost_inter"))
             AggiungiParametro(Command, "@prez_vendi", row("prez_vendi"))
 
-            AggiungiParametro(Command, "@uten_aggi", Service.UtenteDelMomento(row, "uten_aggi"))
-            AggiungiParametro(Command, "@uten_canc", "")
+            AggiungiParametro(Command, "@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            AggiungiParametro(Command, "@uten_cance", "")
 
             EseguiQueryAssegnazioneID(Command, tabella, row)
             Command.Dispose()
@@ -442,7 +422,7 @@
             If Not ctrlimmi Then
                 AggiungiParametro(Command, "@id", row("id"))
             Else
-                AggiungiParametro(Command, "@uten_inse", Service.UtenteDelMomento(row, "uten_inse"))
+                AggiungiParametro(Command, "@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
             End If
             Command.CommandText = SQLstr
             AggiungiParametro(Command, "@cancellato", canc)
@@ -456,8 +436,8 @@
 
             AggiungiParametro(Command, "@prez_unita", row("prez_unita"))
 
-            AggiungiParametro(Command, "@uten_aggi", Service.UtenteDelMomento(row, "uten_aggi"))
-            AggiungiParametro(Command, "@uten_canc", "")
+            AggiungiParametro(Command, "@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            AggiungiParametro(Command, "@uten_cance", "")
 
             EseguiQueryAssegnazioneID(Command, tabella, row)
             Command.Dispose()
@@ -549,7 +529,7 @@
             If Not ctrlimmi Then
                 AggiungiParametro(Command, "@id", row("id"))
             Else
-                AggiungiParametro(Command, "@uten_inse", Service.UtenteDelMomento(row, "uten_inse"))
+                AggiungiParametro(Command, "@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
             End If
             Command.CommandText = SQLstr
             AggiungiParametro(Command, "@cancellato", canc)
@@ -558,8 +538,8 @@
             AggiungiParametro(Command, "@data_pagam", row("data_pagam"))
             AggiungiParametro(Command, "@impo_pagam", row("impo_pagam"))
             AggiungiParametro(Command, "@desc_pagam", row("desc_pagam"))
-            AggiungiParametro(Command, "@uten_aggi", Service.UtenteDelMomento(row, "uten_aggi"))
-            AggiungiParametro(Command, "@uten_canc", "")
+            AggiungiParametro(Command, "@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            AggiungiParametro(Command, "@uten_cance", "")
 
             EseguiQueryAssegnazioneID(Command, tabella, row)
             Command.Dispose()

@@ -153,8 +153,8 @@
         If CheckFormAperto(Schermata_grs_anagrafica, Application.OpenForms, True) Then
             MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
         Else
-            Schermata_grs_anagrafica.Show()
             Schermata_grs_anagrafica.tipo_anagrafica = Schermata_grs_anagrafica.tipo_cliente
+            Schermata_grs_anagrafica.Show()
         End If
     End Sub
 
@@ -162,8 +162,8 @@
         If CheckFormAperto(Schermata_grs_anagrafica, Application.OpenForms, True) Then
             MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
         Else
-            Schermata_grs_anagrafica.Show()
             Schermata_grs_anagrafica.tipo_anagrafica = Schermata_grs_anagrafica.tipo_dipendente
+            Schermata_grs_anagrafica.Show()
         End If
     End Sub
     Private Sub LblArticoli_Click(sender As Object, e As EventArgs) Handles LblArticoli.Click

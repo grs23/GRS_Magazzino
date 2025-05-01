@@ -35,8 +35,8 @@ Partial Class Schermata_grs_anagrafica
         Me.PnlPiede = New System.Windows.Forms.Panel()
         Me.PnlCorpo = New System.Windows.Forms.Panel()
         Me.DgvCorpo = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnRagiSoci = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnDescReca = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.StsTabella.SuspendLayout()
         Me.PnlPiede.SuspendLayout()
@@ -48,9 +48,9 @@ Partial Class Schermata_grs_anagrafica
         'BtnAnnulla
         '
         Me.BtnAnnulla.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnAnnulla.Location = New System.Drawing.Point(724, 23)
+        Me.BtnAnnulla.Location = New System.Drawing.Point(724, 19)
         Me.BtnAnnulla.Name = "BtnAnnulla"
-        Me.BtnAnnulla.Size = New System.Drawing.Size(100, 23)
+        Me.BtnAnnulla.Size = New System.Drawing.Size(138, 26)
         Me.BtnAnnulla.TabIndex = 235
         Me.BtnAnnulla.Text = "<F8> Annulla"
         Me.TltTabella.SetToolTip(Me.BtnAnnulla, "<F8> Annulla")
@@ -59,9 +59,9 @@ Partial Class Schermata_grs_anagrafica
         'BtnFiltra
         '
         Me.BtnFiltra.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnFiltra.Location = New System.Drawing.Point(599, 23)
+        Me.BtnFiltra.Location = New System.Drawing.Point(570, 19)
         Me.BtnFiltra.Name = "BtnFiltra"
-        Me.BtnFiltra.Size = New System.Drawing.Size(100, 23)
+        Me.BtnFiltra.Size = New System.Drawing.Size(138, 26)
         Me.BtnFiltra.TabIndex = 234
         Me.BtnFiltra.Text = "<F7> Filtra"
         Me.TltTabella.SetToolTip(Me.BtnFiltra, "<F7> Filtra")
@@ -89,11 +89,11 @@ Partial Class Schermata_grs_anagrafica
         'TxtRicerca
         '
         Me.TxtRicerca.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtRicerca.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtRicerca.Location = New System.Drawing.Point(17, 25)
         Me.TxtRicerca.Name = "TxtRicerca"
         Me.TxtRicerca.Size = New System.Drawing.Size(192, 20)
         Me.TxtRicerca.TabIndex = 231
+        Me.TltTabella.SetToolTip(Me.TxtRicerca, "Ricerca")
         '
         'Label2
         '
@@ -104,9 +104,9 @@ Partial Class Schermata_grs_anagrafica
         Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Location = New System.Drawing.Point(18, 7)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(83, 15)
+        Me.Label2.Size = New System.Drawing.Size(56, 15)
         Me.Label2.TabIndex = 230
-        Me.Label2.Text = "Descrizione"
+        Me.Label2.Text = "Ricerca"
         '
         'StsTabella
         '
@@ -163,27 +163,33 @@ Partial Class Schermata_grs_anagrafica
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2})
+        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnRagiSoci, Me.ClnDescReca})
         Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
         Me.DgvCorpo.Name = "DgvCorpo"
+        Me.DgvCorpo.ReadOnly = True
         Me.DgvCorpo.RowHeadersVisible = False
         Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCorpo.Size = New System.Drawing.Size(1077, 607)
         Me.DgvCorpo.TabIndex = 0
+        Me.TltTabella.SetToolTip(Me.DgvCorpo, "<Inse> Inserim. - <Enter> Modifica - <Canc> Cancella")
         '
-        'Column1
+        'ClnRagiSoci
         '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column1.HeaderText = "Ragione Sociale"
-        Me.Column1.MinimumWidth = 200
-        Me.Column1.Name = "Column1"
+        Me.ClnRagiSoci.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ClnRagiSoci.DataPropertyName = "ragi_socia"
+        Me.ClnRagiSoci.HeaderText = "Ragione Sociale"
+        Me.ClnRagiSoci.MinimumWidth = 200
+        Me.ClnRagiSoci.Name = "ClnRagiSoci"
+        Me.ClnRagiSoci.ReadOnly = True
         '
-        'Column2
+        'ClnDescReca
         '
-        Me.Column2.HeaderText = "Recapito"
-        Me.Column2.MinimumWidth = 200
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 200
+        Me.ClnDescReca.DataPropertyName = "desc_recap"
+        Me.ClnDescReca.HeaderText = "Recapito"
+        Me.ClnDescReca.MinimumWidth = 200
+        Me.ClnDescReca.Name = "ClnDescReca"
+        Me.ClnDescReca.ReadOnly = True
+        Me.ClnDescReca.Width = 200
         '
         'Panel1
         '
@@ -227,7 +233,7 @@ Partial Class Schermata_grs_anagrafica
     Friend WithEvents PnlCorpo As Panel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents DgvCorpo As DataGridView
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents BtnEsci As Button
+    Friend WithEvents ClnRagiSoci As DataGridViewTextBoxColumn
+    Friend WithEvents ClnDescReca As DataGridViewTextBoxColumn
 End Class

@@ -12,6 +12,7 @@
     End Sub
     Private Sub Schermata_grs_anagrafica_Modi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InizializzaForm.Init(Me, fp, True)
+        ImpostaTemaChiaro(Me)
         CampiTrimSpazi(TxtDescDipe, TxtDescPaga)
         Field.CampiDecimali(9, 2, TxtImpoPaga)
         Field.Data(TxtDataPaga)
@@ -154,6 +155,16 @@
         Close()
     End Sub
 
+
+    Public Sub F6()
+        Dim rowF6 As DataRow
+        If ActiveControl Is TxtDescDipe Then
+            rowF6 = QueryF6.Anagrafica_Dipendenti(Me, TxtDescDipe, conn)
+            If rowF6 IsNot Nothing AndAlso rowF6.Table.Rows.Count > 0 Then
+                TxtDescDipe.Text = rowF6("ragi_socia")
+            End If
+        End If
+    End Sub
 
     'setta
     Private Sub settaVaribili()

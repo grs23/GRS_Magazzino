@@ -12,6 +12,7 @@
             command.CommandText = "CREATE TABLE IF NOT EXISTS grs_anagrafi (
                                                 id SERIAL,
                                                 cancellato      BOOLEAN DEFAULT FALSE,
+                                                bloccato        VARCHAR(30) DEFAULT '', 
                                                 uten_inser      VARCHAR(30) DEFAULT '', 
                                         		uten_aggio      VARCHAR(30) DEFAULT '',
                                                 uten_cance      VARCHAR(30) DEFAULT '',

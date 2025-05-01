@@ -12,8 +12,8 @@
     End Sub
     Private Sub Schermata_grs_anagrafica_Modi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InizializzaForm.Init(Me, fp, True)
+        ImpostaTemaChiaro(Me)
         CampiTrimSpazi(TxtRagiSoci, TxtDescReca)
-
 
         settaVaribili()
 
@@ -31,26 +31,12 @@
         End If
     End Sub
 
-
-    'Private Sub CmbTipoCfLg_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles CmbTipoCfLg.PreviewKeyDown
-    '    If My.Computer.Keyboard.ShiftKeyDown = False AndAlso e.KeyCode = Keys.Tab Then
-    '        e.IsInputKey = True
-    '        If CmbTipoCfLg.Text.Trim <> "" Then
-    '            corpesc()
-    '        End If
-    '    End If
-    'End Sub
-
-
-    'asse
-    Private Sub asse(ByVal row As DataRow)
-        TxtRagiSoci.Text = row("ragi_socia")
-        TxtDescReca.Text = row("desc_recap")
-    End Sub
-    Private Sub modi(ByRef row As DataRow)
-        AzzeraRigo(row, True)
-        row("ragi_socia") = TxtRagiSoci.Text
-        row("desc_recap") = TxtDescReca.Text
+    'PreviewKeyDown
+    Private Sub TxtDescReca_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles TxtDescReca.PreviewKeyDown
+        If My.Computer.Keyboard.ShiftKeyDown = False AndAlso e.KeyCode = Keys.Tab Then
+            e.IsInputKey = True
+            ActiveControl = BtnSalva
+        End If
     End Sub
 
     'validating
@@ -86,6 +72,20 @@
             e.Cancel = True
         End If
     End Sub
+
+    'asse
+    Private Sub asse(ByVal row As DataRow)
+        TxtRagiSoci.Text = row("ragi_socia")
+        TxtDescReca.Text = row("desc_recap")
+    End Sub
+    Private Sub modi(ByRef row As DataRow)
+        AzzeraRigo(row, True)
+        row("tipo_anagr") = tipo_anagrafica
+        row("ragi_socia") = TxtRagiSoci.Text
+        row("desc_recap") = TxtDescReca.Text
+    End Sub
+
+
 
     ''button
     'Private Sub corpesc()
