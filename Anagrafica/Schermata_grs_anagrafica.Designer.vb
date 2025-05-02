@@ -28,20 +28,20 @@ Partial Class Schermata_grs_anagrafica
         Me.BtnAnnulla = New System.Windows.Forms.Button()
         Me.BtnFiltra = New System.Windows.Forms.Button()
         Me.BtnEsci = New System.Windows.Forms.Button()
-        Me.Tsstabella = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TxtRicerca = New System.Windows.Forms.TextBox()
+        Me.DgvCorpo = New System.Windows.Forms.DataGridView()
+        Me.ClnRagiSoci = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnDescReca = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tsstabella = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.StsTabella = New System.Windows.Forms.StatusStrip()
         Me.PnlPiede = New System.Windows.Forms.Panel()
         Me.PnlCorpo = New System.Windows.Forms.Panel()
-        Me.DgvCorpo = New System.Windows.Forms.DataGridView()
-        Me.ClnRagiSoci = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClnDescReca = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StsTabella.SuspendLayout()
         Me.PnlPiede.SuspendLayout()
         Me.PnlCorpo.SuspendLayout()
-        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -78,6 +78,59 @@ Partial Class Schermata_grs_anagrafica
         Me.TltTabella.SetToolTip(Me.BtnEsci, "Esci")
         Me.BtnEsci.UseVisualStyleBackColor = True
         '
+        'TxtRicerca
+        '
+        Me.TxtRicerca.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtRicerca.BackColor = System.Drawing.Color.White
+        Me.TxtRicerca.Location = New System.Drawing.Point(17, 25)
+        Me.TxtRicerca.Name = "TxtRicerca"
+        Me.TxtRicerca.Size = New System.Drawing.Size(192, 20)
+        Me.TxtRicerca.TabIndex = 231
+        Me.TltTabella.SetToolTip(Me.TxtRicerca, "Ricerca")
+        '
+        'DgvCorpo
+        '
+        Me.DgvCorpo.AllowUserToAddRows = False
+        Me.DgvCorpo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnRagiSoci, Me.ClnDescReca})
+        Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
+        Me.DgvCorpo.Name = "DgvCorpo"
+        Me.DgvCorpo.ReadOnly = True
+        Me.DgvCorpo.RowHeadersVisible = False
+        Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvCorpo.Size = New System.Drawing.Size(1077, 607)
+        Me.DgvCorpo.TabIndex = 0
+        Me.TltTabella.SetToolTip(Me.DgvCorpo, "<Inse> Inserim. - <Enter> Modifica - <Canc> Cancella")
+        '
+        'ClnRagiSoci
+        '
+        Me.ClnRagiSoci.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ClnRagiSoci.DataPropertyName = "ragi_socia"
+        Me.ClnRagiSoci.HeaderText = "Ragione Sociale"
+        Me.ClnRagiSoci.MinimumWidth = 200
+        Me.ClnRagiSoci.Name = "ClnRagiSoci"
+        Me.ClnRagiSoci.ReadOnly = True
+        '
+        'ClnDescReca
+        '
+        Me.ClnDescReca.DataPropertyName = "desc_recap"
+        Me.ClnDescReca.HeaderText = "Recapito"
+        Me.ClnDescReca.MinimumWidth = 200
+        Me.ClnDescReca.Name = "ClnDescReca"
+        Me.ClnDescReca.ReadOnly = True
+        Me.ClnDescReca.Width = 200
+        '
         'Tsstabella
         '
         Me.Tsstabella.BackColor = System.Drawing.SystemColors.Control
@@ -85,15 +138,6 @@ Partial Class Schermata_grs_anagrafica
         Me.Tsstabella.Name = "Tsstabella"
         Me.Tsstabella.Size = New System.Drawing.Size(37, 17)
         Me.Tsstabella.Text = "          "
-        '
-        'TxtRicerca
-        '
-        Me.TxtRicerca.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtRicerca.Location = New System.Drawing.Point(17, 25)
-        Me.TxtRicerca.Name = "TxtRicerca"
-        Me.TxtRicerca.Size = New System.Drawing.Size(192, 20)
-        Me.TxtRicerca.TabIndex = 231
-        Me.TltTabella.SetToolTip(Me.TxtRicerca, "Ricerca")
         '
         'Label2
         '
@@ -148,49 +192,6 @@ Partial Class Schermata_grs_anagrafica
         Me.PnlCorpo.Size = New System.Drawing.Size(1088, 619)
         Me.PnlCorpo.TabIndex = 1
         '
-        'DgvCorpo
-        '
-        Me.DgvCorpo.AllowUserToAddRows = False
-        Me.DgvCorpo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnRagiSoci, Me.ClnDescReca})
-        Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
-        Me.DgvCorpo.Name = "DgvCorpo"
-        Me.DgvCorpo.ReadOnly = True
-        Me.DgvCorpo.RowHeadersVisible = False
-        Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCorpo.Size = New System.Drawing.Size(1077, 607)
-        Me.DgvCorpo.TabIndex = 0
-        Me.TltTabella.SetToolTip(Me.DgvCorpo, "<Inse> Inserim. - <Enter> Modifica - <Canc> Cancella")
-        '
-        'ClnRagiSoci
-        '
-        Me.ClnRagiSoci.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ClnRagiSoci.DataPropertyName = "ragi_socia"
-        Me.ClnRagiSoci.HeaderText = "Ragione Sociale"
-        Me.ClnRagiSoci.MinimumWidth = 200
-        Me.ClnRagiSoci.Name = "ClnRagiSoci"
-        Me.ClnRagiSoci.ReadOnly = True
-        '
-        'ClnDescReca
-        '
-        Me.ClnDescReca.DataPropertyName = "desc_recap"
-        Me.ClnDescReca.HeaderText = "Recapito"
-        Me.ClnDescReca.MinimumWidth = 200
-        Me.ClnDescReca.Name = "ClnDescReca"
-        Me.ClnDescReca.ReadOnly = True
-        Me.ClnDescReca.Width = 200
-        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark
@@ -211,12 +212,12 @@ Partial Class Schermata_grs_anagrafica
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Schermata_grs_anagrafica"
         Me.Text = "Schermata_grs_anagrafica"
+        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StsTabella.ResumeLayout(False)
         Me.StsTabella.PerformLayout()
         Me.PnlPiede.ResumeLayout(False)
         Me.PnlPiede.PerformLayout()
         Me.PnlCorpo.ResumeLayout(False)
-        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 

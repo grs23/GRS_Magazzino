@@ -58,7 +58,7 @@
         If TxtDescClie.Text.Trim <> "" Then
             TxtDescClie.Text = RicercaCampo(conn, TxtDescClie.Text.Trim, TabelleDatabase.tb_anagrafica, "ragi_socia",,, " AND tipo_anagr = '" & tipo_cliente & "'")
 
-            If New Query().CaricaRigoAnagrafica(conn, tipo_cliente, TxtDescClie.Text.Trim) Is Nothing Then
+            If New GRSLib.Query.magazzino().CaricaRigoAnagrafica(conn, tipo_cliente, TxtDescClie.Text.Trim) Is Nothing Then
                 e.Cancel = True
                 MessageBox.Show("Cliente non trovato.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
                 SegnalaErrori(TxtDescClie)

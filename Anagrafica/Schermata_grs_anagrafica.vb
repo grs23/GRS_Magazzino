@@ -1,6 +1,6 @@
 ﻿Public Class Schermata_grs_anagrafica
     Public fp As Form
-    Private conn As MySqlConnection = GetConnDb()
+    Private conn As IDbConnection = GetConnDb()
     Public dtCorpo As New DataTable
 
     Public tipo_anagrafica As String = ""
@@ -16,7 +16,7 @@
 
     Private Sub Schermata_grs_anagrafica_Load(sender As Object, e As EventArgs) Handles Me.Load
         InizializzaForm.Init(Me, fp)
-        ImpostaTemaChiaro(Me)
+        ImpostaTema(Me)
         Field.ScrollingContextMenu(True, True, True, DgvCorpo)
         DgvCorpo.DataSource = dtCorpo
         DgvCorpo.AutoGenerateColumns = False
@@ -82,7 +82,7 @@
         Try
             conn.Open()
             If conn.State = ConnectionState.Open Then
-                dtCorpo = New Query().CaricaAnagrafica(conn, tipo_anagrafica)
+                dtCorpo = New GRSLib.Query.magazzino().CaricaAnagrafica(conn, tipo_anagrafica)
                 DgvCorpo.DataSource = dtCorpo
 
                 DgvCorpo.AutoResizeColumns()

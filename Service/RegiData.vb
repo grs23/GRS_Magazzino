@@ -460,17 +460,17 @@
 
             If IsDBNull(rowD("cancellato")) = False AndAlso rowD("cancellato") = True Then
                 If rowD.RowState <> DataRowState.Added AndAlso rowD.RowState <> DataRowState.Detached Then
-                    CancRigo(conn, TabelleDatabase.tb_anagrafica, rowD("id"))
+                    CancRigo(conn, TabelleDatabase.tb_pagamento_dipendente, rowD("id"))
                 End If
             ElseIf rowD.RowState = DataRowState.Added OrElse rowD.RowState = DataRowState.Detached Then
-                RegiPagamentoDipendenti(conn, True, TabelleDatabase.tb_anagrafica, rowD)
+                RegiPagamentoDipendenti(conn, True, TabelleDatabase.tb_pagamento_dipendente, rowD)
                 Try
                     rowD.AcceptChanges()
                 Catch ex As Exception
                     Console.WriteLine(ex)
                 End Try
             ElseIf rowD.RowState = DataRowState.Modified Then
-                RegiPagamentoDipendenti(conn, False, TabelleDatabase.tb_anagrafica, rowD)
+                RegiPagamentoDipendenti(conn, False, TabelleDatabase.tb_pagamento_dipendente, rowD)
             End If
             'End If
         Catch ex As Exception
@@ -688,6 +688,7 @@
                                                perc_stamp,
                                                perc_excel,
                                                perc_logo,
+                                               tema,
 
                                                uten_inser,
                                                uten_aggio,
@@ -700,6 +701,7 @@
                                                @perc_stamp,
                                                @perc_excel,
                                                @perc_logo,
+                                               @tema,
  
                                                @uten_inser,
                                                @uten_aggio,
@@ -713,6 +715,7 @@
                                                perc_stamp = @perc_stamp,
                                                perc_excel = @perc_excel,
                                                perc_logo  = @perc_logo,
+                                               tema       = @tema,
 
                                         	   uten_aggio = @uten_aggio,
                                                uten_cance = @uten_cance
@@ -730,6 +733,7 @@
             Command.Parameters.AddWithValue("@perc_stamp", row("perc_stamp"))
             Command.Parameters.AddWithValue("@perc_excel", row("perc_excel"))
             Command.Parameters.AddWithValue("@perc_logo", row("perc_logo"))
+            Command.Parameters.AddWithValue("@tema", row("tema"))
 
             Command.Parameters.AddWithValue("@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
             Command.Parameters.AddWithValue("@uten_cance", "")

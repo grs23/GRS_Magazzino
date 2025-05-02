@@ -229,6 +229,7 @@
                                          perc_stamp       VARCHAR(20) DEFAULT '',  
                                          perc_excel       VARCHAR(20) DEFAULT '',  
                                          perc_logo        VARCHAR(20) DEFAULT '',
+                                         tema             VARCHAR(10) DEFAULT '',
 
         	                             uten_inser       VARCHAR(30) DEFAULT '',   
         	                             uten_aggio       VARCHAR(30) DEFAULT '',   
@@ -246,6 +247,7 @@
                     rigoPers("perc_stamp") = ""
                     rigoPers("perc_excel") = ""
                     rigoPers("perc_logo") = ""
+                    rigoPers("tema") = "CHIARO"
 
                     AggioraPersonalizzazione(rigoPers, conn)
                     'MessageBox.Show("MANCA UtentiModi.AggiornaPersonalizzazione")

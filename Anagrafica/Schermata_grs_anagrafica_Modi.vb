@@ -1,6 +1,6 @@
 ﻿Public Class Schermata_grs_anagrafica_Modi
     Public fp As Form = Nothing
-    Private conn As MySqlConnection = GetConnDb()
+    Private conn As IDbConnection = GetConnDb()
     Public rowCorpo As DataRow = Nothing
     Public tipo_anagrafica As String = ""
 
@@ -12,7 +12,7 @@
     End Sub
     Private Sub Schermata_grs_anagrafica_Modi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InizializzaForm.Init(Me, fp, True)
-        ImpostaTemaChiaro(Me)
+        ImpostaTema(Me)
         CampiTrimSpazi(TxtRagiSoci, TxtDescReca)
 
         settaVaribili()
@@ -55,7 +55,7 @@
                         e.Cancel = True
                     End If
                 Else
-                    Dim rigo As DataRow = New Query().CaricaRigoAnagrafica(conn, tipo_anagrafica, TxtRagiSoci.Text.Trim)
+                    Dim rigo As DataRow = New GRSLib.Query.magazzino().CaricaRigoAnagrafica(conn, tipo_anagrafica, TxtRagiSoci.Text.Trim)
                     If rigo.RowState = DataRowState.Unchanged AndAlso (rigo("id") <> rowCorpo("id")) Then
                         MessageBox.Show(TxtRagiSoci.Text & " già presente.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 

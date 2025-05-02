@@ -39,6 +39,16 @@ Public Class Query
         Return row
     End Function
 
+    Public Function caricaPersonalizzazioneTema() As String
+        Dim conn As IDbConnection = GetConnDb()
+        Dim tema As String = "CHIARO"
+        Dim rowPers As DataRow = CaricaPersonalizzazione(conn)
+        If rowPers IsNot Nothing AndAlso rowPers("tema").ToString.Trim <> "" Then
+            tema = rowPers("tema").ToString.Trim
+        End If
+        Return tema
+    End Function
+
     ''Sezione Utenti
     Private Function CaricaUtenti(conn As IDbConnection, Optional username As String = "", Optional password As String = "",
                                   Optional Limit1 As Boolean = False, Optional AdminIncluso As Boolean = False, Optional GestoreIncluso As Boolean = True) As DataTable
@@ -110,57 +120,57 @@ Public Class Query
         Return row
     End Function
 
-    Public Function CaricaRigoAnagrafica(conn As IDbConnection, tipo_anagr As String, ragi_socia As String, Optional desc_recap As String = "") As DataRow
-        Dim dt As DataTable = CaricaAnagrafiche(conn, tipo_anagr, ragi_socia, desc_recap)
-        If dt.Rows.Count > 0 Then
-            Return dt.Rows(0)
-        Else
-            Return Nothing
-        End If
-    End Function
-    Public Function CaricaAnagrafica(conn As IDbConnection, tipo_anagr As String, Optional ragi_socia As String = "", Optional desc_recap As String = "") As DataTable
-        Dim dt As DataTable = CaricaAnagrafiche(conn, tipo_anagr, ragi_socia, desc_recap)
-        Return dt
-    End Function
+    'Public Function CaricaRigoAnagrafica(conn As IDbConnection, tipo_anagr As String, ragi_socia As String, Optional desc_recap As String = "") As DataRow
+    '    Dim dt As DataTable = CaricaAnagrafiche(conn, tipo_anagr, ragi_socia, desc_recap)
+    '    If dt.Rows.Count > 0 Then
+    '        Return dt.Rows(0)
+    '    Else
+    '        Return Nothing
+    '    End If
+    'End Function
+    'Public Function CaricaAnagrafica(conn As IDbConnection, tipo_anagr As String, Optional ragi_socia As String = "", Optional desc_recap As String = "") As DataTable
+    '    Dim dt As DataTable = CaricaAnagrafiche(conn, tipo_anagr, ragi_socia, desc_recap)
+    '    Return dt
+    'End Function
 
-    Private Function CaricaAnagrafiche(conn As IDbConnection, tipo_anagr As String, ragi_socia As String, desc_recap As String) As DataTable
-        Dim dt As New DataTable
-        Dim chiudiConn As Boolean = False
-        Try
-            If conn.State <> ConnectionState.Open Then
-                chiudiConn = True
-                conn.Open()
-            End If
+    'Private Function CaricaAnagrafiche(conn As IDbConnection, tipo_anagr As String, ragi_socia As String, desc_recap As String) As DataTable
+    '    Dim dt As New DataTable
+    '    Dim chiudiConn As Boolean = False
+    '    Try
+    '        If conn.State <> ConnectionState.Open Then
+    '            chiudiConn = True
+    '            conn.Open()
+    '        End If
 
-            Dim command As IDbCommand = conn.CreateCommand
+    '        Dim command As IDbCommand = conn.CreateCommand
 
-            command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_anagrafica & " WHERE cancellato = @cancellato "
-            command.CommandText &= "AND tipo_anagr = @tipo_anagr "
+    '        command.CommandText = "SELECT * FROM " & TabelleDatabase.tb_anagrafica & " WHERE cancellato = @cancellato "
+    '        command.CommandText &= "AND tipo_anagr = @tipo_anagr "
 
-            AggiungiParametro(command, "@cancellato", False)
-            AggiungiParametro(command, "@tipo_anagr", tipo_anagr.Trim)
+    '        AggiungiParametro(command, "@cancellato", False)
+    '        AggiungiParametro(command, "@tipo_anagr", tipo_anagr.Trim)
 
-            If ragi_socia IsNot Nothing AndAlso ragi_socia <> "" Then
-                command.CommandText &= "AND ragi_socia = @ragi_socia "
-                AggiungiParametro(command, "@ragi_socia", ragi_socia.Trim)
-            End If
-            If desc_recap IsNot Nothing AndAlso desc_recap <> "" Then
-                command.CommandText &= "AND desc_recap = @desc_recap "
-                AggiungiParametro(command, "@desc_recap", desc_recap.Trim)
-            End If
-            Dim reader As IDataReader = command.ExecuteReader()
+    '        If ragi_socia IsNot Nothing AndAlso ragi_socia <> "" Then
+    '            command.CommandText &= "AND ragi_socia = @ragi_socia "
+    '            AggiungiParametro(command, "@ragi_socia", ragi_socia.Trim)
+    '        End If
+    '        If desc_recap IsNot Nothing AndAlso desc_recap <> "" Then
+    '            command.CommandText &= "AND desc_recap = @desc_recap "
+    '            AggiungiParametro(command, "@desc_recap", desc_recap.Trim)
+    '        End If
+    '        Dim reader As IDataReader = command.ExecuteReader()
 
-            dt.Load(reader)
-        Catch ex As Exception
-            Console.WriteLine("Errore : " & ex.Message)
-        Finally
-            If chiudiConn Then
-                conn.Close()
-            End If
-        End Try
+    '        dt.Load(reader)
+    '    Catch ex As Exception
+    '        Console.WriteLine("Errore : " & ex.Message)
+    '    Finally
+    '        If chiudiConn Then
+    '            conn.Close()
+    '        End If
+    '    End Try
 
-        Return dt
-    End Function
+    '    Return dt
+    'End Function
     Public Function CaricaRigoInventario(conn As IDbConnection, desc_artic As String, Optional quant_artic As Decimal = Nothing) As DataRow
         Dim dt As DataTable = CaricaInventario(conn, desc_artic)
         If dt.Rows.Count > 0 Then
@@ -391,11 +401,12 @@ Public Class Query
 
             Dim command As IDbCommand = conn.CreateCommand
 
-            command.CommandText = "SELECT pagadipe.desc_dipen as dipendente, sum(pagadipe.impo_pagam) as importopagamento, pagadipe.data_pagam"
-            command.CommandText &= "FROM " & TabelleDatabase.tb_pagamento_dipendente & "  as pagadipe WHERE pagadipe.cancellato = @cancellato "
+            command.CommandText = "SELECT pagadipe.*, pagadipe.desc_dipen as dipendente, sum(pagadipe.impo_pagam) as importopagamento, pagadipe.data_pagam "
+            command.CommandText &= "FROM " & TabelleDatabase.tb_pagamento_dipendente & "  as pagadipe "
+            command.CommandText &= "WHERE pagadipe.cancellato = @cancellato "
             command.CommandText &= "AND pagadipe.data_pagam BETWEEN date(@DallData) AND date(@AllaData) "
             command.CommandText &= "GROUP BY pagadipe.desc_dipen "
-            command.CommandText &= "GROUP BY pagadipe.data_pagam DESC, pagadipe.desc_dipen"
+            command.CommandText &= "ORDER BY pagadipe.data_pagam DESC, pagadipe.desc_dipen"
 
             AggiungiParametro(command, "@cancellato", False)
             AggiungiParametro(command, "@DallData", DallData.Date)
@@ -414,4 +425,6 @@ Public Class Query
 
         Return dt
     End Function
+
+
 End Class

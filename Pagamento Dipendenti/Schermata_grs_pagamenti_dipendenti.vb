@@ -18,12 +18,14 @@
         InizializzaForm.Init(Me, fp)
         Field.ScrollingContextMenu(True, True, True, DgvCorpo)
 
-        ImpostaTemaChiaro(Me)
+        ImpostaTema(Me)
+        Field.Data(TxtDallData, TxtAllaData)
         DgvCorpo.DataSource = dtCorpo
         DgvCorpo.AutoGenerateColumns = False
         settaVariabili()
-        PnlCorpo.Enabled = False
-        PnlPiede.Enabled = False
+        'PnlCorpo.Enabled = False
+
+        'PnlPiede.Enabled = False
 
     End Sub
 
@@ -91,7 +93,9 @@
 
                 PnlCorpo.Enabled = True
                 PnlPiede.Enabled = True
-                PnlTestata.Enabled = False
+                'PnlTestata.Enabled = False
+                TxtDallData.Enabled = False
+                TxtAllaData.Enabled = False
                 ActiveControl = DgvCorpo
                 DgvCorpo.Focus()
                 Refresh()

@@ -16,7 +16,7 @@
         'setForm(Me)
         'PnlModulo.BackColor = Color.FromArgb(150, 225, 255)
         'setfont(PnlModulo)
-        ColorButton(BtnCancel, BtnOK)
+        'ColorButton(BtnCancel, BtnOK)
 
 
         Dim conn As MySqlConnection = GetConnDb()

@@ -199,8 +199,8 @@
             numeBottoni += 1
             BtnEsci.TabIndex = 9999 + numeBottoni - totaleBottoni
         End If
-
-        ColorButton(BtnConferma, BtnStampa, BtnEmail, BtnRiproponi, BtnCancella, BtnEsci)
+        Dim tema As String = New Query().caricaPersonalizzazioneTema()
+        ColorButton(tema, BtnConferma, BtnStampa, BtnEmail, BtnRiproponi, BtnCancella, BtnEsci)
 
         If frm IsNot Nothing AndAlso BtnDaSelezionare IsNot Nothing Then
             frm.ActiveControl = BtnDaSelezionare

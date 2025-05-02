@@ -28,25 +28,25 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.BtnEsci = New System.Windows.Forms.Button()
         Me.BtnAnnulla = New System.Windows.Forms.Button()
         Me.BtnFiltra = New System.Windows.Forms.Button()
-        Me.Tsstabella = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TxtRicerca = New System.Windows.Forms.TextBox()
+        Me.DgvCorpo = New System.Windows.Forms.DataGridView()
+        Me.ClnDipendente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnImpoPagam = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TxtDallData = New System.Windows.Forms.MaskedTextBox()
+        Me.TxtAllaData = New System.Windows.Forms.MaskedTextBox()
+        Me.Tsstabella = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.StsTabella = New System.Windows.Forms.StatusStrip()
         Me.PnlPiede = New System.Windows.Forms.Panel()
         Me.PnlCorpo = New System.Windows.Forms.Panel()
-        Me.DgvCorpo = New System.Windows.Forms.DataGridView()
-        Me.ClnDipendente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClnImpoPagam = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PnlTestata = New System.Windows.Forms.Panel()
-        Me.TxtDallData = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TxtAllaData = New System.Windows.Forms.MaskedTextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StsTabella.SuspendLayout()
         Me.PnlPiede.SuspendLayout()
         Me.PnlCorpo.SuspendLayout()
-        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.PnlTestata.SuspendLayout()
         Me.SuspendLayout()
@@ -84,14 +84,6 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.TltTabella.SetToolTip(Me.BtnFiltra, "<F7> Filtra")
         Me.BtnFiltra.UseVisualStyleBackColor = True
         '
-        'Tsstabella
-        '
-        Me.Tsstabella.BackColor = System.Drawing.SystemColors.Control
-        Me.Tsstabella.ForeColor = System.Drawing.Color.Blue
-        Me.Tsstabella.Name = "Tsstabella"
-        Me.Tsstabella.Size = New System.Drawing.Size(37, 17)
-        Me.Tsstabella.Text = "          "
-        '
         'TxtRicerca
         '
         Me.TxtRicerca.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -101,6 +93,81 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.TxtRicerca.Size = New System.Drawing.Size(192, 20)
         Me.TxtRicerca.TabIndex = 231
         Me.TltTabella.SetToolTip(Me.TxtRicerca, "Ricerca")
+        '
+        'DgvCorpo
+        '
+        Me.DgvCorpo.AllowUserToAddRows = False
+        Me.DgvCorpo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnDipendente, Me.ClnImpoPagam})
+        Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
+        Me.DgvCorpo.Name = "DgvCorpo"
+        Me.DgvCorpo.RowHeadersVisible = False
+        Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvCorpo.Size = New System.Drawing.Size(1074, 516)
+        Me.DgvCorpo.TabIndex = 0
+        Me.TltTabella.SetToolTip(Me.DgvCorpo, "<Inse> Inserim. - <Enter> Modifica - <Canc> Cancella")
+        '
+        'ClnDipendente
+        '
+        Me.ClnDipendente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ClnDipendente.DataPropertyName = "dipendente"
+        Me.ClnDipendente.HeaderText = "Dipendente"
+        Me.ClnDipendente.MinimumWidth = 150
+        Me.ClnDipendente.Name = "ClnDipendente"
+        '
+        'ClnImpoPagam
+        '
+        Me.ClnImpoPagam.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.ClnImpoPagam.DataPropertyName = "importopagamento"
+        Me.ClnImpoPagam.HeaderText = "Importo Pagato"
+        Me.ClnImpoPagam.MinimumWidth = 150
+        Me.ClnImpoPagam.Name = "ClnImpoPagam"
+        Me.ClnImpoPagam.Width = 150
+        '
+        'TxtDallData
+        '
+        Me.TxtDallData.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.TxtDallData.Location = New System.Drawing.Point(17, 24)
+        Me.TxtDallData.Mask = "00/00/0000"
+        Me.TxtDallData.Name = "TxtDallData"
+        Me.TxtDallData.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.TxtDallData.Size = New System.Drawing.Size(82, 20)
+        Me.TxtDallData.TabIndex = 554
+        Me.TxtDallData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TltTabella.SetToolTip(Me.TxtDallData, "Dalla data")
+        Me.TxtDallData.ValidatingType = GetType(Date)
+        '
+        'TxtAllaData
+        '
+        Me.TxtAllaData.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.TxtAllaData.Location = New System.Drawing.Point(143, 24)
+        Me.TxtAllaData.Mask = "00/00/0000"
+        Me.TxtAllaData.Name = "TxtAllaData"
+        Me.TxtAllaData.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.TxtAllaData.Size = New System.Drawing.Size(82, 20)
+        Me.TxtAllaData.TabIndex = 555
+        Me.TxtAllaData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TltTabella.SetToolTip(Me.TxtAllaData, "Alla data")
+        Me.TxtAllaData.ValidatingType = GetType(Date)
+        '
+        'Tsstabella
+        '
+        Me.Tsstabella.BackColor = System.Drawing.SystemColors.Control
+        Me.Tsstabella.ForeColor = System.Drawing.Color.Blue
+        Me.Tsstabella.Name = "Tsstabella"
+        Me.Tsstabella.Size = New System.Drawing.Size(37, 17)
+        Me.Tsstabella.Text = "          "
         '
         'Label2
         '
@@ -155,47 +222,6 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.PnlCorpo.Size = New System.Drawing.Size(1085, 528)
         Me.PnlCorpo.TabIndex = 1
         '
-        'DgvCorpo
-        '
-        Me.DgvCorpo.AllowUserToAddRows = False
-        Me.DgvCorpo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnDipendente, Me.ClnImpoPagam})
-        Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
-        Me.DgvCorpo.Name = "DgvCorpo"
-        Me.DgvCorpo.RowHeadersVisible = False
-        Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCorpo.Size = New System.Drawing.Size(1074, 516)
-        Me.DgvCorpo.TabIndex = 0
-        Me.TltTabella.SetToolTip(Me.DgvCorpo, "<Inse> Inserim. - <Enter> Modifica - <Canc> Cancella")
-        '
-        'ClnDipendente
-        '
-        Me.ClnDipendente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ClnDipendente.DataPropertyName = "dipendente"
-        Me.ClnDipendente.HeaderText = "Dipendente"
-        Me.ClnDipendente.MinimumWidth = 150
-        Me.ClnDipendente.Name = "ClnDipendente"
-        '
-        'ClnImpoPagam
-        '
-        Me.ClnImpoPagam.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.ClnImpoPagam.DataPropertyName = "importopagamento"
-        Me.ClnImpoPagam.HeaderText = "Importo Pagato"
-        Me.ClnImpoPagam.MinimumWidth = 150
-        Me.ClnImpoPagam.Name = "ClnImpoPagam"
-        Me.ClnImpoPagam.Width = 150
-        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark
@@ -211,6 +237,8 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         '
         'PnlTestata
         '
+        Me.PnlTestata.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PnlTestata.Controls.Add(Me.TxtDallData)
         Me.PnlTestata.Controls.Add(Me.Label1)
         Me.PnlTestata.Controls.Add(Me.TxtAllaData)
@@ -219,19 +247,6 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.PnlTestata.Name = "PnlTestata"
         Me.PnlTestata.Size = New System.Drawing.Size(1085, 55)
         Me.PnlTestata.TabIndex = 5
-        '
-        'TxtDallData
-        '
-        Me.TxtDallData.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.TxtDallData.Location = New System.Drawing.Point(17, 24)
-        Me.TxtDallData.Mask = "00/00/0000"
-        Me.TxtDallData.Name = "TxtDallData"
-        Me.TxtDallData.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.TxtDallData.Size = New System.Drawing.Size(82, 20)
-        Me.TxtDallData.TabIndex = 554
-        Me.TxtDallData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.TltTabella.SetToolTip(Me.TxtDallData, "Dalla data")
-        Me.TxtDallData.ValidatingType = GetType(Date)
         '
         'Label1
         '
@@ -243,19 +258,6 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.Label1.Size = New System.Drawing.Size(75, 15)
         Me.Label1.TabIndex = 556
         Me.Label1.Text = "Dalla Data"
-        '
-        'TxtAllaData
-        '
-        Me.TxtAllaData.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.TxtAllaData.Location = New System.Drawing.Point(143, 24)
-        Me.TxtAllaData.Mask = "00/00/0000"
-        Me.TxtAllaData.Name = "TxtAllaData"
-        Me.TxtAllaData.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.TxtAllaData.Size = New System.Drawing.Size(82, 20)
-        Me.TxtAllaData.TabIndex = 555
-        Me.TxtAllaData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.TltTabella.SetToolTip(Me.TxtAllaData, "Alla data")
-        Me.TxtAllaData.ValidatingType = GetType(Date)
         '
         'Label4
         '
@@ -276,12 +278,12 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Schermata_grs_Pagamenti_dipendenti"
         Me.Text = "pagamenti_dipendenti"
+        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StsTabella.ResumeLayout(False)
         Me.StsTabella.PerformLayout()
         Me.PnlPiede.ResumeLayout(False)
         Me.PnlPiede.PerformLayout()
         Me.PnlCorpo.ResumeLayout(False)
-        CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.PnlTestata.ResumeLayout(False)
         Me.PnlTestata.PerformLayout()

@@ -12,7 +12,7 @@
     End Sub
     Private Sub Schermata_grs_anagrafica_Modi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InizializzaForm.Init(Me, fp, True)
-        ImpostaTemaChiaro(Me)
+        ImpostaTema(Me)
         CampiTrimSpazi(TxtDescDipe, TxtDescPaga)
         Field.CampiDecimali(9, 2, TxtImpoPaga)
         Field.Data(TxtDataPaga)
@@ -71,27 +71,31 @@
     End Sub
 
     'validating
-    Private Sub TxtRagiSoci_Validating(sender As Object, e As CancelEventArgs) Handles TxtDescDipe.Validating
+    Private Sub TxtDescDipe_Validating(sender As Object, e As CancelEventArgs) Handles TxtDescDipe.Validating
+        e.Cancel = Not controlloCampo(conn, sender, "ragi_socia", TabelleDatabase.tb_anagrafica, True, tipo_anagrafica)
+        'If sender.Text.Trim <> "" Then
+        '    Try
+        '        conn.Open()
 
-        If TxtDescDipe.Text.Trim <> "" Then
-            Try
-                conn.Open()
-
-                Dim rigo As DataRow = New Query().CaricaRigoAnagrafica(conn, tipo_anagrafica, TxtDescDipe.Text.Trim)
-                If rigo Is Nothing Then
-                    MessageBox.Show(TxtDescDipe.Text & " inesistente.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                    e.Cancel = True
-                End If
-        Catch ex As Exception
-                Console.WriteLine("Errore: " & ex.Message)
-            Finally
-                conn.Close()
-            End Try
-        Else
-            MessageBox.Show("Dipendente " & " obbligatorio.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-            e.Cancel = True
-        End If
+        '        Dim rigo As DataRow = New Query().CaricaRigoAnagrafica(conn, tipo_anagrafica, sender.text.trim)
+        '        If rigo Is Nothing Then
+        '            MessageBox.Show(sender.text & " inesistente.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        '            e.Cancel = True
+        '        Else
+        '            sender.text = rigo("ragi_socia")
+        '        End If
+        '    Catch ex As Exception
+        '        Console.WriteLine("Errore: " & ex.Message)
+        '    Finally
+        '        conn.Close()
+        '    End Try
+        'Else
+        '    MessageBox.Show("Dipendente " & " obbligatorio.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        '    e.Cancel = True
+        'End If
     End Sub
+
+
 
     ''button
     'Private Sub corpesc()
@@ -178,8 +182,7 @@
         Tsstabella.Text = TltTabella.GetToolTip(ActiveControl)
     End Sub
 
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
-
-
-
+    End Sub
 End Class
