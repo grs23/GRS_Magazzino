@@ -16,6 +16,7 @@
 
     Private Sub Schermata_grs_anagrafica_Load(sender As Object, e As EventArgs) Handles Me.Load
         InizializzaForm.Init(Me, fp)
+        ImpostaTema(Me)
         Field.ScrollingContextMenu(True, True, True, DgvCorpo)
         DgvCorpo.DataSource = dtCorpo
         DgvCorpo.AutoGenerateColumns = False

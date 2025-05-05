@@ -10,13 +10,14 @@
         End If
         MyBase.WndProc(m)
     End Sub
-    Private Sub Schermata_grs_anagrafica_Modi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Schermata_grs_inventario_Modi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InizializzaForm.Init(Me, fp, True)
+        ImpostaTema(Me)
         CampiTrimSpazi(TxtDescArtic, TxtUnitMisur)
         CampiNumerici(TxtPrezUnita, TxtQuantArtic, TxtQuantMinim)
         CampiDecimali(11, TxtQuantArtic, TxtQuantMinim)
         CampiDecimali(5, TxtPrezUnita)
-
+        FormattaNumero(2, TxtQuantArtic, TxtQuantMinim, TxtPrezUnita)
 
         settaVaribili()
 
@@ -28,7 +29,7 @@
 
 
     'keydown 
-    Private Sub Schermata_grs_anagrafica_Modi_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+    Private Sub Schermata_grs_inventario_Modi_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Escape Then
             'corpesc()
         End If
@@ -48,16 +49,16 @@
     'asse
     Private Sub asse(ByVal row As DataRow)
         TxtDescArtic.Text = row("desc_artic")
-        TxtQuantArtic.Text = row("quant_artic")
+        TxtQuantArtic.Text = row("quan_artic")
         TxtUnitMisur.Text = row("unit_misur")
-        TxtQuantMinim.Text = row("quant_minim")
+        TxtQuantMinim.Text = row("quan_minim")
         TxtPrezUnita.Text = row("prez_unita")
     End Sub
     Private Sub modi(ByRef row As DataRow)
         row("desc_artic") = TxtDescArtic.Text
-        row("quant_artic") = TxtQuantArtic.Text
+        row("quan_artic") = TxtQuantArtic.Text
         row("unit_misur") = TxtUnitMisur.Text
-        row("quant_minim") = TxtQuantMinim.Text
+        row("quan_minim") = TxtQuantMinim.Text
         row("prez_unita") = TxtPrezUnita.Text
     End Sub
 
@@ -67,7 +68,7 @@
         If TxtDescArtic.Text.Trim <> "" Then
             Try
                 conn.Open()
-                If TypeOf fp Is Schermata_grs_anagrafica Then
+                If TypeOf fp Is Schermata_grs_inventario Then
                     Dim dw = New DataView(CType(fp, Schermata_grs_inventario).dtCorpo, "desc_artic = '" & TxtDescArtic.Text.Trim.Replace("'", "''") & "'",
                                               "desc_artic ASC", DataViewRowState.CurrentRows)
 
@@ -157,6 +158,9 @@
 
     'setta
     Private Sub settaVaribili()
+        TxtPrezUnita.Text = "0,00"
+        TxtQuantArtic.Text = "0,00"
+        TxtQuantMinim.Text = "0,00"
     End Sub
 
 

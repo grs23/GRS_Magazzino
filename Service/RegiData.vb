@@ -102,17 +102,17 @@
 
             If IsDBNull(rowD("cancellato")) = False AndAlso rowD("cancellato") = True Then
                 If rowD.RowState <> DataRowState.Added AndAlso rowD.RowState <> DataRowState.Detached Then
-                    CancRigo(conn, TabelleDatabase.tb_anagrafica, rowD("id"))
+                    CancRigo(conn, TabelleDatabase.tb_articoli, rowD("id"))
                 End If
             ElseIf rowD.RowState = DataRowState.Added OrElse rowD.RowState = DataRowState.Detached Then
-                RegiArticoli(conn, True, TabelleDatabase.tb_anagrafica, rowD)
+                RegiArticoli(conn, True, TabelleDatabase.tb_articoli, rowD)
                 Try
                     rowD.AcceptChanges()
                 Catch ex As Exception
                     Console.WriteLine(ex)
                 End Try
             ElseIf rowD.RowState = DataRowState.Modified Then
-                RegiArticoli(conn, False, TabelleDatabase.tb_anagrafica, rowD)
+                RegiArticoli(conn, False, TabelleDatabase.tb_articoli, rowD)
             End If
             'End If
         Catch ex As Exception

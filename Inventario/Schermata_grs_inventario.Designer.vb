@@ -35,10 +35,10 @@ Partial Class Schermata_grs_inventario
         Me.Tsstabella = New System.Windows.Forms.ToolStripStatusLabel()
         Me.PnlCorpo = New System.Windows.Forms.Panel()
         Me.DgvCorpo = New System.Windows.Forms.DataGridView()
+        Me.TltTabella = New System.Windows.Forms.ToolTip(Me.components)
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TltTabella = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.PnlPiede.SuspendLayout()
         Me.StsTabella.SuspendLayout()
@@ -160,6 +160,7 @@ Partial Class Schermata_grs_inventario
         '
         'DgvCorpo
         '
+        Me.DgvCorpo.AllowUserToAddRows = False
         Me.DgvCorpo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -182,12 +183,14 @@ Partial Class Schermata_grs_inventario
         'Column1
         '
         Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column1.DataPropertyName = "desc_artic"
         Me.Column1.HeaderText = "Articolo"
         Me.Column1.MinimumWidth = 200
         Me.Column1.Name = "Column1"
         '
         'Column2
         '
+        Me.Column2.DataPropertyName = "prez_unita"
         Me.Column2.HeaderText = "Costo"
         Me.Column2.MinimumWidth = 200
         Me.Column2.Name = "Column2"
@@ -196,6 +199,7 @@ Partial Class Schermata_grs_inventario
         'Column3
         '
         Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Column3.DataPropertyName = "quan_artic"
         Me.Column3.HeaderText = "Quantità"
         Me.Column3.MinimumWidth = 200
         Me.Column3.Name = "Column3"
@@ -232,8 +236,8 @@ Partial Class Schermata_grs_inventario
     Friend WithEvents Tsstabella As ToolStripStatusLabel
     Friend WithEvents PnlCorpo As Panel
     Friend WithEvents DgvCorpo As DataGridView
+    Friend WithEvents TltTabella As ToolTip
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents TltTabella As ToolTip
 End Class

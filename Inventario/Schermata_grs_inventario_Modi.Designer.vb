@@ -71,7 +71,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label5.Location = New System.Drawing.Point(630, 135)
+        Me.Label5.Location = New System.Drawing.Point(651, 135)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(132, 20)
         Me.Label5.TabIndex = 225
@@ -83,7 +83,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.TxtPrezUnita.MaxLength = 7
         Me.TxtPrezUnita.Name = "TxtPrezUnita"
         Me.TxtPrezUnita.Size = New System.Drawing.Size(150, 20)
-        Me.TxtPrezUnita.TabIndex = 224
+        Me.TxtPrezUnita.TabIndex = 4
         Me.TxtPrezUnita.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.TltTabella.SetToolTip(Me.TxtPrezUnita, "Prezzo unitario")
         '
@@ -102,10 +102,10 @@ Partial Class Schermata_grs_inventario_Modi
         'TxtUnitMisur
         '
         Me.TxtUnitMisur.Location = New System.Drawing.Point(187, 158)
-        Me.TxtUnitMisur.MaxLength = 3
+        Me.TxtUnitMisur.MaxLength = 2
         Me.TxtUnitMisur.Name = "TxtUnitMisur"
         Me.TxtUnitMisur.Size = New System.Drawing.Size(50, 20)
-        Me.TxtUnitMisur.TabIndex = 222
+        Me.TxtUnitMisur.TabIndex = 2
         Me.TltTabella.SetToolTip(Me.TxtUnitMisur, "Unità Di Misura")
         '
         'Label3
@@ -114,7 +114,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label3.Location = New System.Drawing.Point(369, 135)
+        Me.Label3.Location = New System.Drawing.Point(389, 135)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(139, 20)
         Me.Label3.TabIndex = 221
@@ -126,7 +126,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.TxtQuantMinim.MaxLength = 13
         Me.TxtQuantMinim.Name = "TxtQuantMinim"
         Me.TxtQuantMinim.Size = New System.Drawing.Size(150, 20)
-        Me.TxtQuantMinim.TabIndex = 220
+        Me.TxtQuantMinim.TabIndex = 3
         Me.TxtQuantMinim.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.TltTabella.SetToolTip(Me.TxtQuantMinim, "Quantità minima articolo")
         '
@@ -135,7 +135,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.BtnEsci.Location = New System.Drawing.Point(625, 260)
         Me.BtnEsci.Name = "BtnEsci"
         Me.BtnEsci.Size = New System.Drawing.Size(137, 34)
-        Me.BtnEsci.TabIndex = 219
+        Me.BtnEsci.TabIndex = 6
         Me.BtnEsci.Text = "Esci"
         Me.BtnEsci.UseVisualStyleBackColor = True
         '
@@ -144,7 +144,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.BtnSalva.Location = New System.Drawing.Point(469, 260)
         Me.BtnSalva.Name = "BtnSalva"
         Me.BtnSalva.Size = New System.Drawing.Size(137, 34)
-        Me.BtnSalva.TabIndex = 219
+        Me.BtnSalva.TabIndex = 5
         Me.BtnSalva.Text = "Salva"
         Me.BtnSalva.UseVisualStyleBackColor = True
         '
@@ -174,7 +174,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label2.Location = New System.Drawing.Point(84, 135)
+        Me.Label2.Location = New System.Drawing.Point(99, 135)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(78, 20)
         Me.Label2.TabIndex = 3
@@ -186,7 +186,7 @@ Partial Class Schermata_grs_inventario_Modi
         Me.TxtQuantArtic.MaxLength = 13
         Me.TxtQuantArtic.Name = "TxtQuantArtic"
         Me.TxtQuantArtic.Size = New System.Drawing.Size(150, 20)
-        Me.TxtQuantArtic.TabIndex = 2
+        Me.TxtQuantArtic.TabIndex = 1
         Me.TxtQuantArtic.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.TltTabella.SetToolTip(Me.TxtQuantArtic, "Quantità Articolo")
         '
