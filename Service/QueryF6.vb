@@ -33,7 +33,7 @@
 
 
         'MsgBox(chiave.Text)
-        Dim query As String = "SELECT DISTINCT desc_artic, prez_unita FROM " & TabelleDatabase.tb_anagrafica &
+        Dim query As String = "SELECT DISTINCT desc_artic, prez_unita FROM " & TabelleDatabase.tb_articoli &
                               " WHERE cancellato != @cancellato" &
                               " AND desc_artic LIKE @chiave" &
                               " ORDER BY desc_artic"

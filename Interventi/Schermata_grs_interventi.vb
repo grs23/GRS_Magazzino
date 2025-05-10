@@ -334,7 +334,7 @@
         DgvCorpo.AutoGenerateColumns = False
         abilita(PnlTestata)
         disabilita(PnlCorpo, PnlDati, PnlPiede)
-
+        BtnEsci.Enabled = True
         ActiveControl = TxtAnnoInte
     End Sub
 

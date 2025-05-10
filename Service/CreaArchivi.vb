@@ -133,8 +133,8 @@
                                                 nume_inter      INTEGER      DEFAULT 0, 
 
                                                 desc_artic      VARCHAR(100) DEFAULT '',
-                                                quantita        INTEGER      DEFAULT 0,
-                                                prez_unita      NUMERIC(5,2) DEFAULT 0
+                                                quantita        NUMERIC(11,2) DEFAULT 0,
+                                                prez_unita      NUMERIC(11,2) DEFAULT 0
                                                 ) " & motore
 
             command.ExecuteNonQuery()

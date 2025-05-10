@@ -17,9 +17,8 @@
 
         CampiTrimSpazi(TxtDescArti)
         CampiNumerici(TxtPrezUnit, TxtQuantita)
-        CampiInteri(5, TxtQuantita)
-        CampiDecimali(11, 2, TxtPrezUnit)
-
+        CampiDecimali(11, 2, TxtQuantita, TxtPrezUnit)
+        FormattaNumero(2, TxtQuantita, TxtPrezUnit)
         Asse(rowCorpo)
     End Sub
 
