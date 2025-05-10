@@ -63,6 +63,7 @@ Partial Class MenuGRS
         Me.ImageListMenu.Images.SetKeyName(12, "imageedit_8_5915135860.png")
         Me.ImageListMenu.Images.SetKeyName(13, "imageedit_3_9547544875.png")
         Me.ImageListMenu.Images.SetKeyName(14, "intervento.png")
+        Me.ImageListMenu.Images.SetKeyName(15, "imageedit_5_4262356640.png")
         '
         'PnlBottoniV
         '
@@ -150,7 +151,7 @@ Partial Class MenuGRS
         Me.LblRiepilogoInterventi.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblRiepilogoInterventi.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.LblRiepilogoInterventi.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.LblRiepilogoInterventi.ImageIndex = 7
+        Me.LblRiepilogoInterventi.ImageIndex = 15
         Me.LblRiepilogoInterventi.ImageList = Me.ImageListMenu
         Me.LblRiepilogoInterventi.Location = New System.Drawing.Point(600, 0)
         Me.LblRiepilogoInterventi.MaximumSize = New System.Drawing.Size(200, 100)
