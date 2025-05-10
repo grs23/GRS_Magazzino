@@ -427,4 +427,41 @@ Public Class Query
     End Function
 
 
+
+    Public Function CaricaRiepilogoAcquistoMateriali(conn As IDbConnection, ByVal DallData As Date, ByVal AllaData As Date) As DataTable
+        Dim dt As New DataTable
+        Dim chiudiConn As Boolean = False
+        Try
+            If conn.State <> ConnectionState.Open Then
+                chiudiConn = True
+                conn.Open()
+            End If
+
+            Dim command As IDbCommand = conn.CreateCommand
+
+            command.CommandText = "SELECT acquarti.* "
+            command.CommandText &= "FROM " & TabelleDatabase.tb_acquisto_articoli & "  as acquiarti "
+            command.CommandText &= "WHERE acquiarti.cancellato = @cancellato "
+            command.CommandText &= "AND acquiarti.data_acqui BETWEEN date(@DallData) AND date(@AllaData) "
+            command.CommandText &= "ORDER BY acquiarti.data_acqui DESC, acquiarti.desc_artic"
+
+            AggiungiParametro(command, "@cancellato", False)
+            AggiungiParametro(command, "@DallData", DallData.Date)
+            AggiungiParametro(command, "@AllaData", AllaData.Date)
+
+            Dim reader As IDataReader = command.ExecuteReader()
+
+            dt.Load(reader)
+        Catch ex As Exception
+            Console.WriteLine("Errore : " & ex.Message)
+        Finally
+            If chiudiConn Then
+                conn.Close()
+            End If
+        End Try
+
+        Return dt
+    End Function
+
+
 End Class

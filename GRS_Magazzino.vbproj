@@ -99,6 +99,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acquisto Materiali\Schermata_grs_Acquisto_Materiale_Modi.Designer.vb">
+      <DependentUpon>Schermata_grs_Acquisto_Materiale_Modi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Acquisto Materiali\Schermata_grs_Acquisto_Materiale_Modi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Acquisto Materiali\Schermata_grs_Acquisto_Materiali.Designer.vb">
+      <DependentUpon>Schermata_grs_Acquisto_Materiali.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Acquisto Materiali\Schermata_grs_Acquisto_Materiali.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Anagrafica\Schermata_grs_anagrafica.Designer.vb">
       <DependentUpon>Schermata_grs_anagrafica.vb</DependentUpon>
     </Compile>
@@ -194,6 +206,12 @@
     <Compile Include="Service\Tasti.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Acquisto Materiali\Schermata_grs_Acquisto_Materiale_Modi.resx">
+      <DependentUpon>Schermata_grs_Acquisto_Materiale_Modi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Acquisto Materiali\Schermata_grs_Acquisto_Materiali.resx">
+      <DependentUpon>Schermata_grs_Acquisto_Materiali.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Anagrafica\Schermata_grs_anagrafica.resx">
       <DependentUpon>Schermata_grs_anagrafica.vb</DependentUpon>
     </EmbeddedResource>

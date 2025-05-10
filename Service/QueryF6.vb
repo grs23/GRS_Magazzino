@@ -26,4 +26,25 @@
         Return HelpF6Row(conn, query, titolo, colonne, chiave, "I", fp)
     End Function
 
+    Public Shared Function Articoli(ByRef fp As Form, ByRef chiave As TextBox, ByVal conn As MySqlConnection)
+        'Dim conn As SQLiteConnection = New Service().AccessDB
+        Dim titolo As String = "Anagrafica"
+        '
+
+
+        'MsgBox(chiave.Text)
+        Dim query As String = "SELECT DISTINCT desc_artic, prez_unita FROM " & TabelleDatabase.tb_anagrafica &
+                              " WHERE cancellato != @cancellato" &
+                              " AND desc_artic LIKE @chiave" &
+                              " ORDER BY desc_artic"
+
+        Dim colonne As New List(Of String()) From {
+            New String() {"Articolo"},
+            New String() {"Prezzo Unitario"}
+            }
+
+        Return HelpF6Row(conn, query, titolo, colonne, chiave, "I", fp)
+    End Function
+
+
 End Class

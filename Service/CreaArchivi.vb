@@ -71,7 +71,7 @@
                                                 desc_artic      VARCHAR(100) DEFAULT '', 
                                                 data_acqui      DATE,
                                                 impo_acqui      NUMERIC(11,2) DEFAULT 0,
-                                                quan_acqui      INTEGER      DEFAULT 0,
+                                                quan_acqui      NUMERIC(11,2) DEFAULT 0,
 
                                                 desc_pagam      VARCHAR(100) DEFAULT ''
                                                 ) " & motore

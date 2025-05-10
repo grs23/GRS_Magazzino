@@ -564,6 +564,109 @@
     End Sub
 
 
+    Public Sub AggiornaAcquistoArticoli(ByRef rowD As DataRow, conn As IDbConnection)
+        Try
+
+            If IsDBNull(rowD("cancellato")) = False AndAlso rowD("cancellato") = True Then
+                If rowD.RowState <> DataRowState.Added AndAlso rowD.RowState <> DataRowState.Detached Then
+                    CancRigo(conn, TabelleDatabase.tb_acquisto_articoli, rowD("id"))
+                End If
+            ElseIf rowD.RowState = DataRowState.Added OrElse rowD.RowState = DataRowState.Detached Then
+                RegiAcquistoArticoli(conn, True, TabelleDatabase.tb_acquisto_articoli, rowD)
+                Try
+                    rowD.AcceptChanges()
+                Catch ex As Exception
+                    Console.WriteLine(ex)
+                End Try
+            ElseIf rowD.RowState = DataRowState.Modified Then
+                RegiAcquistoArticoli(conn, False, TabelleDatabase.tb_acquisto_articoli, rowD)
+            End If
+            'End If
+        Catch ex As Exception
+            MessageBox.Show("Errore durante la conferma:  " & ex.Message, "Errore...", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        Finally
+        End Try
+    End Sub
+    Private Sub RegiAcquistoArticoli(ByVal conn As IDbConnection, ctrlimmi As Boolean, tabella As String, row As DataRow)
+        Dim SQLstr As String
+        ' MsgBox(tabella)
+        Dim ChiudiConn As Boolean = False
+        'MsgBox(tabella)
+        If conn.State = ConnectionState.Closed Then
+            conn.Open()
+            ChiudiConn = True
+        End If
+
+        Dim Command As IDbCommand = conn.CreateCommand
+
+        Try
+            If ctrlimmi = True Then
+                SQLstr = "INSERT INTO " & tabella & " (
+                                                cancellato,  
+                                                bloccato, 
+                                                desc_artic, 
+                                                data_acqui,
+                                                impo_acqui, 
+                                                quan_acqui, 
+                                                desc_pagam,
+                                                uten_inser,
+                                                uten_aggio,
+                                                uten_cance)
+                                           VALUES 
+                                              (@cancellato,
+                                               @desc_artic, 
+                                               @data_acqui,
+                                               @impo_acqui, 
+                                               @quan_acqui, 
+                                               @desc_pagam,
+                                               @uten_inser,
+                                               @uten_aggio,
+                                               @uten_cance)"
+
+            Else
+                SQLstr = "UPDATE " & tabella & " SET 
+                                               cancellato   = @cancellato,
+                                               bloccato     = @bloccato,
+                                               desc_artic   = @desc_artic, 
+                                               data_acqui   = @data_acqui,
+                                               impo_acqui   = @impo_acqui, 
+                                               quan_acqui   = @quan_acqui, 
+                                               desc_pagam   = @desc_pagam,
+                                               
+                                               uten_aggio   = @uten_aggio,
+                                               uten_cance   = @uten_cance
+                                               WHERE id     = @id"
+            End If
+            If Not ctrlimmi Then
+                AggiungiParametro(Command, "@id", row("id"))
+            Else
+                AggiungiParametro(Command, "@uten_inser", Service.UtenteDelMomento(row, "uten_inser"))
+            End If
+            Command.CommandText = SQLstr
+            AggiungiParametro(Command, "@cancellato", canc)
+            AggiungiParametro(Command, "@bloccato", " ")
+            AggiungiParametro(Command, "@desc_artic", row("desc_artic"))
+            AggiungiParametro(Command, "@data_acqui", row("data_acqui"))
+            AggiungiParametro(Command, "@impo_acqui", row("impo_acqui"))
+            AggiungiParametro(Command, "@quan_acqui", row("quan_acqui"))
+            AggiungiParametro(Command, "@desc_pagam", row("desc_pagam"))
+            AggiungiParametro(Command, "@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
+            AggiungiParametro(Command, "@uten_cance", "")
+
+            EseguiQueryAssegnazioneID(Command, tabella, row)
+            Command.Dispose()
+        Catch ex As Exception
+            'Log.Error(ex.Message, ex)
+            MessageBox.Show(ex.Message.ToString)
+            'sqlTran.Rollback()
+        Finally
+            If ChiudiConn Then
+                conn.Close()
+            End If
+        End Try
+
+    End Sub
+
     Public Sub AggiornaUtente(ByRef rowD As DataRow, conn As MySqlConnection)
         Try
             If IsDBNull(rowD("cancellato")) = False AndAlso rowD("cancellato") = True Then
