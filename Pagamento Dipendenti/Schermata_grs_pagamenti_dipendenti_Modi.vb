@@ -61,7 +61,7 @@
         AzzeraRigo(row, True)
         row("desc_dipen") = TxtDescDipe.Text
         row("desc_pagam") = TxtDescPaga.Text
-        If IsDate(TxtDataPaga) Then
+        If IsDate(TxtDataPaga.Text) Then
             row("data_pagam") = TxtDataPaga.Text
         Else
             row("data_pagam") = DBNull.Value

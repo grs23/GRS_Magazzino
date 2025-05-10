@@ -36,7 +36,7 @@ Partial Class Schermata_grs_inventario
         Me.PnlCorpo = New System.Windows.Forms.Panel()
         Me.DgvCorpo = New System.Windows.Forms.DataGridView()
         Me.TltTabella = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnArticolo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
@@ -86,9 +86,9 @@ Partial Class Schermata_grs_inventario
         'BtnAnnulla
         '
         Me.BtnAnnulla.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnAnnulla.Location = New System.Drawing.Point(724, 23)
+        Me.BtnAnnulla.Location = New System.Drawing.Point(716, 19)
         Me.BtnAnnulla.Name = "BtnAnnulla"
-        Me.BtnAnnulla.Size = New System.Drawing.Size(100, 23)
+        Me.BtnAnnulla.Size = New System.Drawing.Size(138, 26)
         Me.BtnAnnulla.TabIndex = 235
         Me.BtnAnnulla.Text = "<F8> Annulla"
         Me.BtnAnnulla.UseVisualStyleBackColor = True
@@ -96,9 +96,9 @@ Partial Class Schermata_grs_inventario
         'BtnFiltra
         '
         Me.BtnFiltra.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnFiltra.Location = New System.Drawing.Point(599, 23)
+        Me.BtnFiltra.Location = New System.Drawing.Point(558, 19)
         Me.BtnFiltra.Name = "BtnFiltra"
-        Me.BtnFiltra.Size = New System.Drawing.Size(100, 23)
+        Me.BtnFiltra.Size = New System.Drawing.Size(138, 26)
         Me.BtnFiltra.TabIndex = 234
         Me.BtnFiltra.Text = "<F7> Filtra"
         Me.BtnFiltra.UseVisualStyleBackColor = True
@@ -106,12 +106,11 @@ Partial Class Schermata_grs_inventario
         'TxtRicerca
         '
         Me.TxtRicerca.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtRicerca.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtRicerca.Location = New System.Drawing.Point(17, 25)
         Me.TxtRicerca.Name = "TxtRicerca"
         Me.TxtRicerca.Size = New System.Drawing.Size(192, 20)
         Me.TxtRicerca.TabIndex = 231
-        Me.TltTabella.SetToolTip(Me.TxtRicerca, "Descrizione Articolo" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.TltTabella.SetToolTip(Me.TxtRicerca, "Descrizione")
         '
         'Label2
         '
@@ -173,20 +172,21 @@ Partial Class Schermata_grs_inventario
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
+        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnArticolo, Me.Column2, Me.Column3})
         Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
         Me.DgvCorpo.Name = "DgvCorpo"
         Me.DgvCorpo.RowHeadersVisible = False
+        Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCorpo.Size = New System.Drawing.Size(1077, 607)
         Me.DgvCorpo.TabIndex = 0
         '
-        'Column1
+        'ClnArticolo
         '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column1.DataPropertyName = "desc_artic"
-        Me.Column1.HeaderText = "Articolo"
-        Me.Column1.MinimumWidth = 200
-        Me.Column1.Name = "Column1"
+        Me.ClnArticolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ClnArticolo.DataPropertyName = "desc_artic"
+        Me.ClnArticolo.HeaderText = "Articolo"
+        Me.ClnArticolo.MinimumWidth = 200
+        Me.ClnArticolo.Name = "ClnArticolo"
         '
         'Column2
         '
@@ -237,7 +237,7 @@ Partial Class Schermata_grs_inventario
     Friend WithEvents PnlCorpo As Panel
     Friend WithEvents DgvCorpo As DataGridView
     Friend WithEvents TltTabella As ToolTip
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents ClnArticolo As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
 End Class

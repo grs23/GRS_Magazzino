@@ -26,7 +26,9 @@
         'PnlCorpo.Enabled = False
 
         'PnlPiede.Enabled = False
-
+        TxtRicerca.Enabled = False
+        DgvCorpo.Enabled = False
+        ActiveControl = TxtDallData
     End Sub
 
     'Keydown
@@ -91,11 +93,13 @@
                 DgvCorpo.AutoResizeColumns()
                 DgvCorpo.AutoResizeRows()
 
-                PnlCorpo.Enabled = True
-                PnlPiede.Enabled = True
+                'PnlCorpo.Enabled = True
+                'PnlPiede.Enabled = True
                 'PnlTestata.Enabled = False
                 TxtDallData.Enabled = False
                 TxtAllaData.Enabled = False
+                DgvCorpo.Enabled = True
+                TxtRicerca.Enabled = True
                 ActiveControl = DgvCorpo
                 DgvCorpo.Focus()
                 Refresh()

@@ -112,6 +112,39 @@
         Close()
     End Sub
 
+    'filtra
+    Public Sub Filtra() Handles TxtRicerca.TextChanged
+        If dtCorpo.Rows.Count <> 0 Then
+            'MI SALVO L'INDICE NEL CASO IL FILTRA VENISSE RICHIAMATO DALLA GRIGLIA, IN MODO DA POTERMI RIPOSIZIONARE SULL'INDICE CORRETTO QUALORA VENISSE FILTRATA DALLA GRIGLIA STESSA
+            Dim index As Integer = 0
+            Try
+                If DgvCorpo.Rows.Count > 0 Then
+                    index = DgvCorpo.CurrentRow.Index
+                End If
+            Catch ex As Exception
+
+            End Try
+
+            'DI SEGUITO NON HO USATO NOMI DI CAMPI FISSI COSÌ NEL CASO IL DATAPROPERTYNAME CAMBIASSE NON C'È BISOGNO DI CORREGGERE ANCHE QUI
+            'UNICA ECCEZIONE LO FA IL TIPO_FATTU PERCHÈ NON PRESENTE NELLE COLONNE
+            DgvCorpo.DataSource = New DataView(dtCorpo, ClnArticolo.DataPropertyName & " LIKE '%" & TxtRicerca.Text.Replace("'", "''") & "%'",
+                                                     ClnArticolo.DataPropertyName & " ASC", DataViewRowState.CurrentRows)
+
+            'RIPOSIZIONAMENTO SUL RIGO DELLA GRIGLIA
+            Try
+                If ActiveControl Is DgvCorpo Then
+                    ActiveControl = DgvCorpo
+                    DgvCorpo.Rows(index).Selected = True
+                    DgvCorpo.CurrentCell = DgvCorpo.Rows(index).Cells(0)
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+
+        'lblNumeOper.Text = DgvCorpo.Rows.Count
+    End Sub
+
 
 
 

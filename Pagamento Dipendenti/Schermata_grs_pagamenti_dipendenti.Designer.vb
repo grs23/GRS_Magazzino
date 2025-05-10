@@ -30,8 +30,6 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.BtnFiltra = New System.Windows.Forms.Button()
         Me.TxtRicerca = New System.Windows.Forms.TextBox()
         Me.DgvCorpo = New System.Windows.Forms.DataGridView()
-        Me.ClnDipendente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClnImpoPagam = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TxtDallData = New System.Windows.Forms.MaskedTextBox()
         Me.TxtAllaData = New System.Windows.Forms.MaskedTextBox()
         Me.Tsstabella = New System.Windows.Forms.ToolStripStatusLabel()
@@ -43,6 +41,9 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.PnlTestata = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.ClnDipendente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnDescPaga = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnImpoPagam = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvCorpo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StsTabella.SuspendLayout()
         Me.PnlPiede.SuspendLayout()
@@ -109,7 +110,7 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnDipendente, Me.ClnImpoPagam})
+        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ClnDipendente, Me.ClnDescPaga, Me.ClnImpoPagam})
         Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
         Me.DgvCorpo.Name = "DgvCorpo"
         Me.DgvCorpo.RowHeadersVisible = False
@@ -117,23 +118,6 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.DgvCorpo.Size = New System.Drawing.Size(1074, 516)
         Me.DgvCorpo.TabIndex = 0
         Me.TltTabella.SetToolTip(Me.DgvCorpo, "<Inse> Inserim. - <Enter> Modifica - <Canc> Cancella")
-        '
-        'ClnDipendente
-        '
-        Me.ClnDipendente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ClnDipendente.DataPropertyName = "dipendente"
-        Me.ClnDipendente.HeaderText = "Dipendente"
-        Me.ClnDipendente.MinimumWidth = 150
-        Me.ClnDipendente.Name = "ClnDipendente"
-        '
-        'ClnImpoPagam
-        '
-        Me.ClnImpoPagam.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.ClnImpoPagam.DataPropertyName = "importopagamento"
-        Me.ClnImpoPagam.HeaderText = "Importo Pagato"
-        Me.ClnImpoPagam.MinimumWidth = 150
-        Me.ClnImpoPagam.Name = "ClnImpoPagam"
-        Me.ClnImpoPagam.Width = 150
         '
         'TxtDallData
         '
@@ -270,6 +254,31 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
         Me.Label4.TabIndex = 557
         Me.Label4.Text = "Alla Data"
         '
+        'ClnDipendente
+        '
+        Me.ClnDipendente.DataPropertyName = "dipendente"
+        Me.ClnDipendente.HeaderText = "Dipendente"
+        Me.ClnDipendente.MinimumWidth = 400
+        Me.ClnDipendente.Name = "ClnDipendente"
+        Me.ClnDipendente.Width = 400
+        '
+        'ClnDescPaga
+        '
+        Me.ClnDescPaga.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ClnDescPaga.DataPropertyName = "desc_pagam"
+        Me.ClnDescPaga.HeaderText = "Descrizione  Pagamento"
+        Me.ClnDescPaga.MinimumWidth = 150
+        Me.ClnDescPaga.Name = "ClnDescPaga"
+        '
+        'ClnImpoPagam
+        '
+        Me.ClnImpoPagam.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.ClnImpoPagam.DataPropertyName = "importopagamento"
+        Me.ClnImpoPagam.HeaderText = "Importo Pagato"
+        Me.ClnImpoPagam.MinimumWidth = 150
+        Me.ClnImpoPagam.Name = "ClnImpoPagam"
+        Me.ClnImpoPagam.Width = 150
+        '
         'Schermata_grs_Pagamenti_dipendenti
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -309,5 +318,6 @@ Partial Class Schermata_grs_Pagamenti_dipendenti
     Friend WithEvents TxtAllaData As MaskedTextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents ClnDipendente As DataGridViewTextBoxColumn
+    Friend WithEvents ClnDescPaga As DataGridViewTextBoxColumn
     Friend WithEvents ClnImpoPagam As DataGridViewTextBoxColumn
 End Class

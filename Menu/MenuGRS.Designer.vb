@@ -57,6 +57,10 @@ Partial Class MenuGRS
         Me.ImageListMenu.Images.SetKeyName(6, "imageedit_27_5196813309.png")
         Me.ImageListMenu.Images.SetKeyName(7, "imageedit_1_4119941565.png")
         Me.ImageListMenu.Images.SetKeyName(8, "imageedit_6_5806935903.png")
+        Me.ImageListMenu.Images.SetKeyName(9, "imageedit_3_6153304468.png")
+        Me.ImageListMenu.Images.SetKeyName(10, "imageedit_5_9677777657.png")
+        Me.ImageListMenu.Images.SetKeyName(11, "imageedit_6_8202311677.png")
+        Me.ImageListMenu.Images.SetKeyName(12, "imageedit_8_5915135860.png")
         '
         'PnlBottoniV
         '
@@ -78,7 +82,7 @@ Partial Class MenuGRS
         Me.LblArticoli.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblArticoli.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.LblArticoli.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblArticoli.ImageIndex = 5
+        Me.LblArticoli.ImageIndex = 11
         Me.LblArticoli.ImageList = Me.ImageListMenu
         Me.LblArticoli.Location = New System.Drawing.Point(0, 200)
         Me.LblArticoli.MaximumSize = New System.Drawing.Size(200, 100)
@@ -95,7 +99,7 @@ Partial Class MenuGRS
         Me.LblDipendenti.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblDipendenti.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.LblDipendenti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblDipendenti.ImageIndex = 1
+        Me.LblDipendenti.ImageIndex = 10
         Me.LblDipendenti.ImageList = Me.ImageListMenu
         Me.LblDipendenti.Location = New System.Drawing.Point(0, 100)
         Me.LblDipendenti.MaximumSize = New System.Drawing.Size(200, 100)
@@ -112,7 +116,7 @@ Partial Class MenuGRS
         Me.LblClienti.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblClienti.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.LblClienti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LblClienti.ImageIndex = 0
+        Me.LblClienti.ImageIndex = 9
         Me.LblClienti.ImageList = Me.ImageListMenu
         Me.LblClienti.Location = New System.Drawing.Point(0, 0)
         Me.LblClienti.MaximumSize = New System.Drawing.Size(200, 100)
@@ -195,7 +199,7 @@ Partial Class MenuGRS
         Me.LblPagamenti.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblPagamenti.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.LblPagamenti.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.LblPagamenti.ImageIndex = 8
+        Me.LblPagamenti.ImageIndex = 12
         Me.LblPagamenti.ImageList = Me.ImageListMenu
         Me.LblPagamenti.Location = New System.Drawing.Point(0, 0)
         Me.LblPagamenti.MaximumSize = New System.Drawing.Size(200, 100)
