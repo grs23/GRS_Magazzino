@@ -224,4 +224,13 @@
             Schermata_grs_riepilogo_interventi.Show()
         End If
     End Sub
+
+    Private Sub LblAcquistoMateriali_Click(sender As Object, e As EventArgs) Handles LblAcquistoMateriali.Click
+        If CheckFormAperto(Schermata_grs_Acquisto_Materiali, Application.OpenForms, True) Then
+            MessageBox.Show("Schermata già aperta!!!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        Else
+            Schermata_grs_Acquisto_Materiali.fp = Me
+            Schermata_grs_Acquisto_Materiali.Show()
+        End If
+    End Sub
 End Class

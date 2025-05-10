@@ -61,6 +61,7 @@ Partial Class MenuGRS
         Me.ImageListMenu.Images.SetKeyName(10, "imageedit_5_9677777657.png")
         Me.ImageListMenu.Images.SetKeyName(11, "imageedit_6_8202311677.png")
         Me.ImageListMenu.Images.SetKeyName(12, "imageedit_8_5915135860.png")
+        Me.ImageListMenu.Images.SetKeyName(13, "imageedit_3_9547544875.png")
         '
         'PnlBottoniV
         '
@@ -182,7 +183,7 @@ Partial Class MenuGRS
         Me.LblAcquistoMateriali.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblAcquistoMateriali.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.LblAcquistoMateriali.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.LblAcquistoMateriali.ImageIndex = 7
+        Me.LblAcquistoMateriali.ImageIndex = 13
         Me.LblAcquistoMateriali.ImageList = Me.ImageListMenu
         Me.LblAcquistoMateriali.Location = New System.Drawing.Point(200, 0)
         Me.LblAcquistoMateriali.MaximumSize = New System.Drawing.Size(200, 100)
