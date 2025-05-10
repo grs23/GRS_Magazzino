@@ -52,9 +52,9 @@ Partial Class Schermata_grs_interventi
         Me.Tsstabella = New System.Windows.Forms.ToolStripStatusLabel()
         Me.PnlCorpo = New System.Windows.Forms.Panel()
         Me.DgvCorpo = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clnDescArti = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnQuantita = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClnPrezUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TltTabella = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.PnlDati.SuspendLayout()
@@ -187,7 +187,7 @@ Partial Class Schermata_grs_interventi
         Me.TxtFineInte.Location = New System.Drawing.Point(147, 94)
         Me.TxtFineInte.Mask = "00/00/0000"
         Me.TxtFineInte.Name = "TxtFineInte"
-        Me.TxtFineInte.Size = New System.Drawing.Size(70, 20)
+        Me.TxtFineInte.Size = New System.Drawing.Size(82, 20)
         Me.TxtFineInte.TabIndex = 2
         Me.TltTabella.SetToolTip(Me.TxtFineInte, "Fine Intervento")
         Me.TxtFineInte.ValidatingType = GetType(Date)
@@ -209,7 +209,7 @@ Partial Class Schermata_grs_interventi
         Me.TxtInizInte.Location = New System.Drawing.Point(10, 94)
         Me.TxtInizInte.Mask = "00/00/0000"
         Me.TxtInizInte.Name = "TxtInizInte"
-        Me.TxtInizInte.Size = New System.Drawing.Size(70, 20)
+        Me.TxtInizInte.Size = New System.Drawing.Size(82, 20)
         Me.TxtInizInte.TabIndex = 1
         Me.TltTabella.SetToolTip(Me.TxtInizInte, "Inizio Intervento")
         Me.TxtInizInte.ValidatingType = GetType(Date)
@@ -233,7 +233,7 @@ Partial Class Schermata_grs_interventi
         Me.TxtDescClie.Name = "TxtDescClie"
         Me.TxtDescClie.Size = New System.Drawing.Size(750, 20)
         Me.TxtDescClie.TabIndex = 0
-        Me.TltTabella.SetToolTip(Me.TxtDescClie, "Ragione sociale Cliente")
+        Me.TltTabella.SetToolTip(Me.TxtDescClie, "Ragione sociale Cliente. <F6> Scelta.")
         '
         'PnlTestata
         '
@@ -379,6 +379,8 @@ Partial Class Schermata_grs_interventi
         '
         'DgvCorpo
         '
+        Me.DgvCorpo.AllowUserToAddRows = False
+        Me.DgvCorpo.AllowUserToDeleteRows = False
         Me.DgvCorpo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -391,34 +393,39 @@ Partial Class Schermata_grs_interventi
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DgvCorpo.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCorpo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
+        Me.DgvCorpo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clnDescArti, Me.ClnQuantita, Me.ClnPrezUnit})
+        Me.DgvCorpo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvCorpo.Location = New System.Drawing.Point(5, 8)
         Me.DgvCorpo.Name = "DgvCorpo"
         Me.DgvCorpo.RowHeadersVisible = False
+        Me.DgvCorpo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCorpo.Size = New System.Drawing.Size(1077, 208)
         Me.DgvCorpo.TabIndex = 0
         '
-        'Column1
+        'clnDescArti
         '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column1.HeaderText = "Articolo"
-        Me.Column1.MinimumWidth = 200
-        Me.Column1.Name = "Column1"
+        Me.clnDescArti.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clnDescArti.DataPropertyName = "desc_artic"
+        Me.clnDescArti.HeaderText = "Articolo"
+        Me.clnDescArti.MinimumWidth = 200
+        Me.clnDescArti.Name = "clnDescArti"
         '
-        'Column2
+        'ClnQuantita
         '
-        Me.Column2.HeaderText = "Costo"
-        Me.Column2.MinimumWidth = 200
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 200
+        Me.ClnQuantita.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.ClnQuantita.DataPropertyName = "quantita"
+        Me.ClnQuantita.HeaderText = "Quantità"
+        Me.ClnQuantita.MinimumWidth = 200
+        Me.ClnQuantita.Name = "ClnQuantita"
+        Me.ClnQuantita.Width = 200
         '
-        'Column3
+        'ClnPrezUnit
         '
-        Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column3.HeaderText = "Quantità"
-        Me.Column3.MinimumWidth = 200
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 200
+        Me.ClnPrezUnit.DataPropertyName = "prez_unita"
+        Me.ClnPrezUnit.HeaderText = "Prezzo Unitario"
+        Me.ClnPrezUnit.MinimumWidth = 200
+        Me.ClnPrezUnit.Name = "ClnPrezUnit"
+        Me.ClnPrezUnit.Width = 200
         '
         'Schermata_grs_interventi
         '
@@ -451,9 +458,6 @@ Partial Class Schermata_grs_interventi
     Friend WithEvents Tsstabella As ToolStripStatusLabel
     Friend WithEvents PnlCorpo As Panel
     Friend WithEvents DgvCorpo As DataGridView
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents TltTabella As ToolTip
     Friend WithEvents PnlDati As Panel
     Friend WithEvents PnlTestata As Panel
@@ -476,4 +480,7 @@ Partial Class Schermata_grs_interventi
     Friend WithEvents BtnCancella As Button
     Friend WithEvents BtnNuovo As Button
     Friend WithEvents BtnSalva As Button
+    Friend WithEvents clnDescArti As DataGridViewTextBoxColumn
+    Friend WithEvents ClnQuantita As DataGridViewTextBoxColumn
+    Friend WithEvents ClnPrezUnit As DataGridViewTextBoxColumn
 End Class

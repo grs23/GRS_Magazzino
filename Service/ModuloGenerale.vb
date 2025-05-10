@@ -103,6 +103,13 @@
 
             End If
 
+            ' Corpo (PnlDati)
+            If panel1.Controls.Find("PnlDati", False).Length > 0 Then
+                Dim PnlDati As Panel = panel1.Controls.Find("PnlDati", False).First
+                PnlDati.BackColor = Color.FromArgb(230, 230, 230)
+
+
+            End If
             ' Piede (PnlPiede)
             If panel1.Controls.Find("PnlPiede", False).Length > 0 Then
                 Dim PnlPiede As Panel = panel1.Controls.Find("PnlPiede", False).First

@@ -157,7 +157,7 @@ Partial Class Schermata_grs_interventi_Modi
         Me.TxtDescArti.Name = "TxtDescArti"
         Me.TxtDescArti.Size = New System.Drawing.Size(750, 20)
         Me.TxtDescArti.TabIndex = 0
-        Me.TltTabella.SetToolTip(Me.TxtDescArti, "Descrizione Articolo" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.TltTabella.SetToolTip(Me.TxtDescArti, "Descrizione Articolo. <F6> Scelta.")
         '
         'Schermata_grs_interventi_Modi
         '

@@ -256,6 +256,8 @@
                                                 cost_inter,
                                                 prez_vendi,
 
+                                                desc_lavor,
+
                                                 uten_inser,
                                                 uten_aggio,
                                                 uten_cance)
@@ -273,6 +275,8 @@
 
                                                @cost_inter,
                                                @prez_vendi,
+
+                                               @desc_lavor,
 
                                                @uten_inser,
                                                @uten_aggio,
@@ -293,6 +297,8 @@
 
                                                cost_inter   = @cost_inter,
                                                prez_vendi   = @prez_vendi,
+
+                                               desc_lavor   = @desc_lavor,
                                                
                                                uten_aggio   = @uten_aggio,
                                                uten_cance   = @uten_cance
@@ -317,6 +323,8 @@
 
             AggiungiParametro(Command, "@cost_inter", row("cost_inter"))
             AggiungiParametro(Command, "@prez_vendi", row("prez_vendi"))
+
+            AggiungiParametro(Command, "@desc_lavor", row("desc_lavor"))
 
             AggiungiParametro(Command, "@uten_aggio", Service.UtenteDelMomento(row, "uten_aggio"))
             AggiungiParametro(Command, "@uten_cance", "")
@@ -344,11 +352,11 @@
                 End If
             ElseIf rowD.RowState = DataRowState.Added OrElse rowD.RowState = DataRowState.Detached Then
                 RegiInterventoDettaglio(conn, True, TabelleDatabase.tb_intervento_dettaglio, rowD)
-                Try
-                    rowD.AcceptChanges()
-                Catch ex As Exception
-                    Console.WriteLine(ex)
-                End Try
+                'Try
+                '    rowD.AcceptChanges()
+                'Catch ex As Exception
+                '    Console.WriteLine(ex)
+                'End Try
             ElseIf rowD.RowState = DataRowState.Modified Then
                 RegiInterventoDettaglio(conn, False, TabelleDatabase.tb_intervento_dettaglio, rowD)
             End If

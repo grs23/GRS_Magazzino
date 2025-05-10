@@ -18,7 +18,7 @@
 
     Private Sub Me_Load(sender As Object, e As EventArgs) Handles Me.Load
         InizializzaForm.Init(Me, fp)
-
+        ImpostaTema(Me)
         CampiTrimSpazi(TxtDescClie, TxtDescLavo)
         CampiNumerici(TxtAnnoInte, TxtNumeInte, TxtPrezVend, TxtCostInte)
         CampiInteri(4, TxtAnnoInte)
@@ -27,6 +27,7 @@
         Field.Data(TxtInizInte, TxtFineInte)
 
         Field.ScrollingContextMenu(True, True, True, DgvCorpo)
+        disabilita()
 
         If rigoRiepilogo Is Nothing Then
             SettaVariabili()
@@ -40,6 +41,7 @@
 
     Private Sub TxtNumeInte_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles TxtNumeInte.PreviewKeyDown
         If My.Computer.Keyboard.ShiftKeyDown = False AndAlso e.KeyCode = Keys.Tab Then
+            e.IsInputKey = True
             If TxtNumeInte.Text = "" Then
                 TxtNumeInte.Text = "0"
             End If
@@ -71,21 +73,29 @@
             If My.Computer.Keyboard.ShiftKeyDown = False Then
                 If DgvCorpo.CurrentRow IsNot Nothing Then
                     e.SuppressKeyPress = True
-                    Modi(DgvCorpo.CurrentRow.DataBoundItem.row)
+                    TrasfDati(DgvCorpo.CurrentRow.DataBoundItem.row)
                 End If
             End If
         ElseIf e.KeyCode = Keys.Insert Then
             e.SuppressKeyPress = True
-            Modi()
+            TrasfDati()
         ElseIf e.KeyCode = Keys.Delete Then
             If DgvCorpo.CurrentRow IsNot Nothing Then
                 e.SuppressKeyPress = True
                 DgvCorpo.CurrentRow.DataBoundItem.row("cancellato") = Not DgvCorpo.CurrentRow.DataBoundItem.row("cancellato")
+
+                If dtCorpo.Rows.Count > 0 AndAlso dtCorpo.AsEnumerable().Any(Function(x) x("cancellato") = False) Then
+                    TxtCostInte.Text = dtCorpo.AsEnumerable.
+                                                    Where(Function(x) x("cancellato") = False).
+                                                    Sum(Function(x) (x("quantita") * x("prez_unita")))
+                Else
+                    TxtCostInte.Text = "0"
+                End If
             End If
         End If
     End Sub
 
-    Private Sub Modi(Optional rowAppo As DataRow = Nothing)
+    Private Sub TrasfDati(Optional rowAppo As DataRow = Nothing)
         If CheckFormAperto(Schermata_grs_interventi_Modi, My.Application.OpenForms) = False Then
             Schermata_grs_interventi_Modi.fp = Me
 
@@ -93,7 +103,7 @@
                 Schermata_grs_interventi_Modi.rowCorpo = rowAppo
             Else
                 Schermata_grs_interventi_Modi.rowCorpo = dtCorpo.NewRow
-                Schermata_grs_interventi_Modi.rowCorpo("cancellato") = False
+                AzzeraRigo(Schermata_grs_interventi_Modi.rowCorpo)
             End If
 
             Schermata_grs_interventi_Modi.Show()
@@ -102,13 +112,32 @@
         End If
     End Sub
 
-    Private Sub Asse(Optional rowAppo As DataRow = Nothing)
+    Private Sub Asse(rowAppo As DataRow)
+        TxtAnnoInte.Text = rowAppo("anno_inter")
+
+        rigoTestata("nume_inter") = rowAppo("nume_inter")
+
+        If IsDate(rowAppo("iniz_inter")) Then
+            TxtInizInte.Text = rowAppo("iniz_inter")
+        End If
+
+        If IsDate(rowAppo("fine_inter")) Then
+            TxtFineInte.Text = rowAppo("fine_inter")
+        End If
+        TxtDescClie.Text = rowAppo("desc_clien")
+        TxtDescLavo.Text = rowAppo("desc_lavor")
+
+        TxtCostInte.Text = rowAppo("cost_inter")
+        TxtPrezVend.Text = rowAppo("prez_vendi")
+    End Sub
+
+    Private Sub Modi(Optional rowAppo As DataRow = Nothing)
         rowAppo("anno_inter") = TxtAnnoInte.Text
 
         If TxtNumeInte.Text = "0" Then
-            rowAppo("nume_inter") = rigoTestata("nume_inter")
-        Else
             rowAppo("nume_inter") = New Query().CalcolaProgressivoInterventiAnnuale(conn, rowAppo("anno_inter"))
+        Else
+            rowAppo("nume_inter") = rigoTestata("nume_inter")
         End If
 
         If TxtInizInte.Text.Length = 10 AndAlso IsDate(TxtInizInte.Text) Then
@@ -121,14 +150,14 @@
         rowAppo("desc_clien") = TxtDescClie.Text
         rowAppo("desc_lavor") = TxtDescLavo.Text
 
-        rowAppo("cost_inter") = TxtCostInte.Text
+        rowAppo("prez_vendi") = TxtPrezVend.Text
 
         If dtCorpo.Rows.Count > 0 AndAlso dtCorpo.AsEnumerable().Any(Function(x) x("cancellato") = False) Then
-            rowAppo("prez_vendi") = dtCorpo.AsEnumerable.
+            rowAppo("cost_inter") = dtCorpo.AsEnumerable.
                                             Where(Function(x) x("cancellato") = False).
                                             Sum(Function(x) (x("quantita") * x("prez_unita")))
         Else
-            rowAppo("prez_vendi") = "0"
+            rowAppo("cost_inter") = "0"
         End If
     End Sub
 
@@ -140,7 +169,7 @@
     Private Sub BtnSalva_Click(sender As Object, e As EventArgs) Handles BtnSalva.Click
         Try
             conn.Open()
-            Asse(rigoTestata)
+            Modi(rigoTestata)
 
             AggiornaInterventoTestata(rigoTestata, conn)
 
@@ -175,15 +204,15 @@
 
                     'If rigaTrovata IsNot Nothing Then
                     If rigoRiepilogo IsNot Nothing Then
-                            ' Trova l'indice della riga nel DataTable
-                            Dim indice As Integer = rigoRiepilogo.Table.Rows.IndexOf(rigoRiepilogo)
+                        ' Trova l'indice della riga nel DataTable
+                        Dim indice As Integer = rigoRiepilogo.Table.Rows.IndexOf(rigoRiepilogo)
 
-                            ' Posizionati e seleziona la riga nel DataGridView
-                            Schermata_grs_riepilogo_interventi.DgvCorpo.ClearSelection()
-                            Schermata_grs_riepilogo_interventi.DgvCorpo.Rows(indice).Selected = True
-                            Schermata_grs_riepilogo_interventi.DgvCorpo.FirstDisplayedScrollingRowIndex = indice
-                        End If
+                        ' Posizionati e seleziona la riga nel DataGridView
+                        Schermata_grs_riepilogo_interventi.DgvCorpo.ClearSelection()
+                        Schermata_grs_riepilogo_interventi.DgvCorpo.Rows(indice).Selected = True
+                        Schermata_grs_riepilogo_interventi.DgvCorpo.FirstDisplayedScrollingRowIndex = indice
                     End If
+                End If
 
                 BtnEsci.PerformClick()
             End If
@@ -201,7 +230,7 @@
     Private Sub BtnCancella_Click(sender As Object, e As EventArgs) Handles BtnCancella.Click
         Try
             conn.Open()
-            If Service.CancRigo(TabelleDatabase.tb_intervento_testata, DgvCorpo.CurrentRow.DataBoundItem.row("id"), conn, True) Then
+            If Service.CancRigo(TabelleDatabase.tb_intervento_testata, rigoTestata("id"), conn, True) Then
                 For Each rigoDettaglio As DataRow In dtCorpo.Rows
                     Service.CancRigo(TabelleDatabase.tb_intervento_dettaglio, DgvCorpo.CurrentRow.DataBoundItem.row("id"), conn, False)
                 Next
@@ -241,20 +270,17 @@
                         Return False
                     Else
                         dtCorpo = New Query().CaricaInterventiDettagliLista(conn, TxtAnnoInte.Text, TxtNumeInte.Text)
+                        Asse(rigoTestata)
                     End If
                 End If
 
                 DgvCorpo.DataSource = dtCorpo
                 DgvCorpo.AutoGenerateColumns = False
 
-                PnlDati.Enabled = True
-                PnlCorpo.Enabled = True
+                abilita(PnlDati, PnlCorpo, PnlPiede)
+                disabilita(PnlTestata)
 
-                BtnSalva.Enabled = True
-                BtnNuovo.Enabled = TypeOf fp Is MenuGRS
-                BtnCancella.Enabled = True
-
-                PnlTestata.Enabled = False
+                ActiveControl = TxtDescClie
             End If
         Catch ex As Exception
             MessageBox.Show("Error while connecting to Server. " & ex.Message)
@@ -264,6 +290,16 @@
         End Try
         Return True
     End Function
+
+    Public Sub F6()
+        Dim rowF6 As DataRow = Nothing
+        If ActiveControl Is TxtDescClie Then
+            rowF6 = QueryF6.Anagrafica_Clienti(Me, TxtDescClie, conn)
+            If rowF6 IsNot Nothing Then
+                TxtDescClie.Text = rowF6("ragi_socia")
+            End If
+        End If
+    End Sub
 
 
     Private Sub SwitchEsc()
@@ -296,14 +332,25 @@
 
         DgvCorpo.DataSource = dtCorpo
         DgvCorpo.AutoGenerateColumns = False
+        abilita(PnlTestata)
+        disabilita(PnlCorpo, PnlDati, PnlPiede)
 
-        PnlTestata.Enabled = False
-        PnlDati.Enabled = False
-        PnlCorpo.Enabled = False
+        ActiveControl = TxtAnnoInte
+    End Sub
 
-        BtnSalva.Enabled = False
-        BtnNuovo.Enabled = False
-        BtnCancella.Enabled = False
+    'cellformatting
+    Private Sub DgvCorpo_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvCorpo.CellFormatting
+        If dtCorpo.Rows.Count > 0 Then
+            If e.RowIndex >= 0 AndAlso e.RowIndex <= dtCorpo.Rows.Count - 1 Then
+                If DgvCorpo.Rows(e.RowIndex).DataBoundItem.row("cancellato") = True Then
+                    DgvCorpo.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.LightGray
+                    DgvCorpo.Rows(e.RowIndex).DefaultCellStyle.SelectionBackColor = Color.Gray
+                Else
+                    DgvCorpo.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Empty
+                    DgvCorpo.Rows(e.RowIndex).DefaultCellStyle.SelectionBackColor = Color.Empty
+                End If
+            End If
+        End If
     End Sub
 
 

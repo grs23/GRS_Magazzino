@@ -365,7 +365,7 @@ Public Class Query
 
             Dim command As IDbCommand = conn.CreateCommand
 
-            command.CommandText = "SELECT MAX(nume_inter) AS max FROM " & TabelleDatabase.tb_intervento_dettaglio &
+            command.CommandText = "SELECT MAX(nume_inter) AS max FROM " & TabelleDatabase.tb_intervento_testata &
                                   " WHERE cancellato = @cancellato AND anno_inter = @anno_inter"
 
             AggiungiParametro(command, "@cancellato", False)
@@ -381,7 +381,7 @@ Public Class Query
                 conn.Close()
             End If
         End Try
-        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 AndAlso Not IsDBNull(dt.Rows(0)("max")) Then
             Return dt.Rows(0)("max") + 1
         Else
             Return 1
